@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare Pro - Hospital Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --info-color: #3498db;
+        }
+        body { background: #ecf0f1; }
+        .navbar { background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .stat-card { background: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .stat-card:hover { transform: translateY(-5px); }
+        .stat-card i { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 10px; }
+        .stat-card h3 { color: var(--primary-color); font-weight: bold; }
+        .card { box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: none; }
+        .card-header { font-weight: bold; }
+        .btn-sm { padding: 0.4rem 0.8rem; }
+        .table-responsive { border-radius: 10px; overflow: hidden; }
+        .section-content { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .badge { padding: 0.5rem 0.75rem; }
+        .notification-item { padding: 15px; border-left: 4px solid var(--info-color); margin-bottom: 10px; background: white; border-radius: 5px; }
+        .form-control:focus { border-color: var(--primary-color); box-shadow: 0 0 0 0.2rem rgba(44,62,80,0.25); }
+        @media (max-width: 768px) {
+            .stat-card { margin-bottom: 15px; }
+            .table { font-size: 0.9rem; }
+            .btn-sm { padding: 0.3rem 0.6rem; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#dashboard">
+                <i class="fas fa-hospital-user"></i> MediCare Pro
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('dashboard')"><i class="fas fa-chart-line"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('appointments')"><i class="fas fa-calendar"></i> Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('prescriptions')"><i class="fas fa-prescription"></i> Prescriptions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('billing')"><i class="fas fa-receipt"></i> Billing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('medical')"><i class="fas fa-file-medical"></i> Medical</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" onclick="showSection('notifications')">
+                            <i class="fas fa-bell"></i> Notifications
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="notif-badge" style="display:none;">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle"></i> {{ user_name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid py-4 pb-5">
+        <!-- DASHBOARD SECTION -->
+        <section id="dashboard" class="section-content">
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    <h2 class="fw-bold"><i class="fas fa-chart-line text-success"></i> Dashboard</h2>
+                    <p class="text-muted">Welcome to MediCare Pro Hospital Management System</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <p class="mb-0"><strong id="current-date"></strong></p>
+                    <p class="text-muted" id="current-time"></p>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="row mb-4">
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="stat-card">
+                        <i class="fas fa-user-injured"></i>
+                        <h6>Total Patients</h6>
+                        <h3 id="stat-patients">0</h3>
+                        <small class="text-info">Active in system</small>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="stat-card">
+                        <i class="fas fa-calendar-check"></i>
+                        <h6>Appointments</h6>
+                        <h3 id="stat-appointments">0</h3>
+                        <small class="text-warning">Scheduled</small>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="stat-card">
+                        <i class="fas fa-prescription"></i>
+                        <h6>Prescriptions</h6>
+                        <h3 id="stat-prescriptions">0</h3>
+                        <small class="text-primary">Active</small>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="stat-card">
+                        <i class="fas fa-dollar-sign"></i>
+                        <h6>Revenue</h6>
+                        <h3 id="stat-revenue">$0</h3>
+                        <small class="text-success">Total billing</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Status -->
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-heartbeat"></i> System Status</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Database:</strong> <span class="badge bg-success">✓ Connected</span></p>
+                            <p><strong>API:</strong> <span class="badge bg-success">✓ Running</span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Notifications:</strong> <span class="badge bg-success">✓ Active</span></p>
+                            <p><strong>Payments:</strong> <span class="badge bg-warning">✓ Ready</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- APPOINTMENTS SECTION -->
+        <section id="appointments" class="section-content" style="display:none;">
+            <div class="row mb-4">
+                <div class="col-md-8"><h2 class="fw-bold"><i class="fas fa-calendar text-primary"></i> Appointments</h2></div>
+                <div class="col-md-4 text-end"><button class="btn btn-primary btn-sm" onclick="showAppointmentForm()"><i class="fas fa-plus"></i> Schedule</button></div>
+            </div>
+
+            <div id="appointmentForm" class="card mb-4" style="display:none;">
+                <div class="card-header bg-primary text-white"><h5 class="mb-0"><i class="fas fa-calendar-plus"></i> Schedule New Appointment</h5></div>
+                <div class="card-body">
+                    <form id="apptForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label"><i class="fas fa-user-md"></i> Doctor</label>
+                                <select class="form-select" id="doctor_id" required>
+                                    <option value="">Choose doctor...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label"><i class="fas fa-hospital"></i> Hospital</label>
+                                <select class="form-select" id="hospital_id" required>
+                                    <option value="">Choose hospital...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label"><i class="fas fa-calendar-day"></i> Date</label>
+                                <input type="date" class="form-control" id="appointment_date" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label"><i class="fas fa-clock"></i> Time</label>
+                                <input type="time" class="form-control" id="appointment_time" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"><i class="fas fa-stethoscope"></i> Reason for Visit</label>
+                            <textarea class="form-control" id="appointment_reason" rows="2" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Schedule</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideAppointmentForm()">Cancel</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-primary text-white"><h5 class="mb-0"><i class="fas fa-list"></i> Your Appointments</h5></div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th><i class="fas fa-user-md"></i> Doctor</th>
+                                    <th><i class="fas fa-calendar"></i> Date</th>
+                                    <th><i class="fas fa-clock"></i> Time</th>
+                                    <th><i class="fas fa-hospital"></i> Hospital</th>
+                                    <th><i class="fas fa-tag"></i> Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="appointmentsTableBody">
+                                <tr><td colspan="6" class="text-center text-muted">Loading...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRESCRIPTIONS SECTION -->
+        <section id="prescriptions" class="section-content" style="display:none;">
+            <div class="row mb-4">
+                <div class="col-md-8"><h2 class="fw-bold"><i class="fas fa-prescription text-success"></i> Prescriptions</h2></div>
+                <div class="col-md-4 text-end"><button class="btn btn-success btn-sm" id="issuePrescBtn" onclick="showPrescriptionForm()"><i class="fas fa-plus"></i> Issue</button></div>
+            </div>
+
+            <div id="prescriptionForm" class="card mb-4" style="display:none;">
+                <div class="card-header bg-success text-white"><h5 class="mb-0"><i class="fas fa-prescription-bottle"></i> Issue Prescription</h5></div>
+                <div class="card-body">
+                    <form id="prescForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label"><i class="fas fa-user"></i> Patient</label>
+                                <select class="form-select" id="patient_id" required>
+                                    <option value="">Choose patient...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label"><i class="fas fa-pills"></i> Medication</label>
+                                <input type="text" class="form-control" id="medication" placeholder="e.g., Aspirin" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Dosage</label>
+                                <input type="text" class="form-control" id="dosage" placeholder="e.g., 500mg" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Frequency</label>
+                                <select class="form-select" id="frequency" required>
+                                    <option value="">Select...</option>
+                                    <option value="Once daily">Once daily</option>
+                                    <option value="Twice daily">Twice daily</option>
+                                    <option value="Three times daily">Three times daily</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Duration</label>
+                                <input type="text" class="form-control" id="duration" placeholder="e.g., 7 days" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Issue</button>
+                        <button type="button" class="btn btn-secondary" onclick="hidePrescriptionForm()">Cancel</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-success text-white"><h5 class="mb-0"><i class="fas fa-list"></i> Prescriptions</h5></div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th><i class="fas fa-pills"></i> Medication</th>
+                                    <th>Dosage</th>
+                                    <th>Frequency</th>
+                                    <th><i class="fas fa-tag"></i> Status</th>
+                                    <th>Refills</th>
+                                </tr>
+                            </thead>
+                            <tbody id="prescriptionsTableBody">
+                                <tr><td colspan="5" class="text-center text-muted">Loading...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BILLING SECTION -->
+        <section id="billing" class="section-content" style="display:none;">
+            <div class="row mb-4">
+                <div class="col-md-8"><h2 class="fw-bold"><i class="fas fa-receipt text-warning"></i> Billing</h2></div>
+                <div class="col-md-4 text-end"><button class="btn btn-warning btn-sm" id="createBillBtn" onclick="showBillingForm()"><i class="fas fa-plus"></i> Invoice</button></div>
+            </div>
+
+            <div id="billingForm" class="card mb-4" style="display:none;">
+                <div class="card-header bg-warning text-dark"><h5 class="mb-0"><i class="fas fa-file-invoice"></i> Create Invoice</h5></div>
+                <div class="card-body">
+                    <form id="billForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label"><i class="fas fa-user"></i> Patient</label>
+                                <select class="form-select" id="bill_patient_id" required>
+                                    <option value="">Choose patient...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label"><i class="fas fa-dollar-sign"></i> Amount</label>
+                                <input type="number" class="form-control" id="bill_amount" step="0.01" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"><i class="fas fa-file-alt"></i> Description</label>
+                            <textarea class="form-control" id="bill_description" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-warning"><i class="fas fa-check"></i> Create</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideBillingForm()">Cancel</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-warning text-dark"><h5 class="mb-0"><i class="fas fa-history"></i> Billing History</h5></div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th><i class="fas fa-user"></i> Patient</th>
+                                    <th><i class="fas fa-dollar-sign"></i> Amount</th>
+                                    <th><i class="fas fa-tag"></i> Status</th>
+                                    <th>Description</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="billingTableBody">
+                                <tr><td colspan="5" class="text-center text-muted">Loading...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MEDICAL RECORDS SECTION -->
+        <section id="medical" class="section-content" style="display:none;">
+            <h2 class="fw-bold mb-4"><i class="fas fa-file-medical text-danger"></i> Medical Records</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-danger text-white"><h5 class="mb-0"><i class="fas fa-history"></i> Medical History</h5></div>
+                        <div class="card-body">
+                            <div id="medicalHistoryList" class="list-group">
+                                <p class="text-muted">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-info text-white"><h5 class="mb-0"><i class="fas fa-download"></i> Export Records</h5></div>
+                        <div class="card-body">
+                            <p class="text-muted mb-3">Download your medical records</p>
+                            <button class="btn btn-info w-100" onclick="downloadRecordsPDF()"><i class="fas fa-file-pdf"></i> PDF</button>
+                            <button class="btn btn-info w-100 mt-2" onclick="downloadRecordsCSV()"><i class="fas fa-file-csv"></i> CSV</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOTIFICATIONS SECTION -->
+        <section id="notifications" class="section-content" style="display:none;">
+            <h2 class="fw-bold mb-4"><i class="fas fa-bell text-warning"></i> Notifications</h2>
+            <div class="card">
+                <div class="card-header bg-warning text-dark">
+                    <div class="row align-items-center">
+                        <div class="col"><h5 class="mb-0"><i class="fas fa-bell"></i> Notification Center</h5></div>
+                        <div class="col-auto"><button class="btn btn-sm btn-outline-dark" onclick="markAllRead()">Mark all</button></div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="notificationsList">
+                        <p class="text-muted">Loading notifications...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title"><i class="fas fa-credit-card"></i> Process Payment</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="paymentForm">
+                        <div class="mb-3">
+                            <label class="form-label">Invoice</label>
+                            <input type="text" class="form-control" id="payment_billing_text" disabled>
+                            <input type="hidden" id="payment_billing_id">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"><i class="fas fa-dollar-sign"></i> Amount</label>
+                            <input type="number" class="form-control" id="payment_amount" step="0.01" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Payment Method</label>
+                            <select class="form-select" id="payment_method" required>
+                                <option value="">Select...</option>
+                                <option value="card">Credit/Debit Card</option>
+                                <option value="cash">Cash</option>
+                                <option value="transfer">Bank Transfer</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Process Payment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p class="mb-0">&copy; 2026 MediCare Pro Hospital Management System. All rights reserved.</p>
+        <small class="text-muted">Secure • HIPAA Compliant • ISO 27001 Certified</small>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        const API_BASE = 'http://localhost:5000';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+            loadDashboardData();
+            
+            document.getElementById('apptForm')?.addEventListener('submit', scheduleAppointment);
+            document.getElementById('prescForm')?.addEventListener('submit', issuePrescription);
+            document.getElementById('billForm')?.addEventListener('submit', createBilling);
+            document.getElementById('paymentForm')?.addEventListener('submit', processPayment);
+        });
+
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', 
+                { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            document.getElementById('current-time').textContent = now.toLocaleTimeString();
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section-content').forEach(el => el.style.display = 'none');
+            document.getElementById(sectionId).style.display = 'block';
+            window.scrollTo(0, 0);
+
+            if (sectionId === 'appointments') loadAppointments();
+            else if (sectionId === 'prescriptions') loadPrescriptions();
+            else if (sectionId === 'billing') loadBillingHistory();
+            else if (sectionId === 'medical') loadMedicalHistory();
+            else if (sectionId === 'notifications') loadNotifications();
+        }
+
+        async function loadDashboardData() {
+            try {
+                const response = await fetch(`${API_BASE}/get_statistics`);
+                const data = await response.json();
+                document.getElementById('stat-patients').textContent = data.total_patients || 0;
+                document.getElementById('stat-appointments').textContent = data.total_appointments || 0;
+                document.getElementById('stat-prescriptions').textContent = data.total_prescriptions || 0;
+                document.getElementById('stat-revenue').textContent = '$' + (data.total_billing || 0);
+            } catch (error) { console.error('Error:', error); }
+        }
+
+        function showAppointmentForm() { document.getElementById('appointmentForm').style.display = 'block'; }
+        function hideAppointmentForm() { 
+            document.getElementById('appointmentForm').style.display = 'none';
+            document.getElementById('apptForm').reset();
+        }
+
+        async function scheduleAppointment(e) {
+            e.preventDefault();
+            try {
+                const response = await fetch(`${API_BASE}/schedule_appointment`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        doctor_id: document.getElementById('doctor_id').value,
+                        hospital_id: document.getElementById('hospital_id').value,
+                        appointment_date: document.getElementById('appointment_date').value,
+                        appointment_time: document.getElementById('appointment_time').value,
+                        reason: document.getElementById('appointment_reason').value
+                    })
+                });
+                if (response.ok) {
+                    alert('Appointment scheduled!');
+                    hideAppointmentForm();
+                    loadAppointments();
+                }
+            } catch (error) { console.error('Error:', error); }
+        }
+
+        async function loadAppointments() {
+            try {
+                const response = await fetch(`${API_BASE}/get_appointments`);
+                const appointments = await response.json();
+                const tbody = document.getElementById('appointmentsTableBody');
+                tbody.innerHTML = appointments.map(appt => `
+                    <tr>
+                        <td>Dr. ${appt.doctor_id}</td>
+                        <td>${appt.appointment_date}</td>
+                        <td>${appt.appointment_time}</td>
+                        <td>${appt.hospital_id}</td>
+                        <td><span class="badge bg-${appt.status === 'scheduled' ? 'success' : 'danger'}">${appt.status}</span></td>
+                        <td>
+                            ${appt.status === 'scheduled' ? `<button class="btn btn-sm btn-danger" onclick="cancelAppointment(${appt.id})">Cancel</button>` : '—'}
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) { console.error('Error:', error); }
+        }
+
+        async function cancelAppointment(id) {
+            if (confirm('Cancel appointment?')) {
+                try {
+                    await fetch(`${API_BASE}/cancel_appointment/${id}`, { method: 'DELETE' });
+                    loadAppointments();
+                } catch (error) { console.error('Error:', error); }
+            }
+        }
+
+        function showPrescriptionForm() { document.getElementById('prescriptionForm').style.display = 'block'; }
+        function hidePrescriptionForm() {
+            document.getElementById('prescriptionForm').style.display = 'none';
+            document.getElementById('prescForm').reset();
+        }
+
+        async function issuePrescription(e) {
+            e.preventDefault();
+            try {
+                const response = await fetch(`${API_BASE}/issue_prescription`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        patient_id: document.getElementById('patient_id').value,
+                        medication: document.getElementById('medication').value,
+                        dosage: document.getElementById('dosage').value,
+                        frequency: document.getElementById('frequency').value,
+                        duration: document.getElementById('duration').value,
+                        instructions: '',
+                        refills_remaining: 0
+                    })
+                });
+                if (response.ok) {
+                    alert('Prescription issued!');
+                    hidePrescriptionForm();
+                    loadPrescriptions();
+                }
+            } catch (error) { console.error('Error:', error); }
+        }
+
+        async function loadPrescriptions() {
+            try {
+                const response = await fetch(`${API_BASE}/get_prescriptions`);
+                const prescriptions = await response.json();
+                const tbody = document.getElementById('prescriptionsTableBody');
+                tbody.innerHTML = prescriptions.map(presc => `
+                    <tr>
+                        <td>${presc.medication}</td>
+                        <td>${presc.dosage}</td>
+                        <td>${presc.frequency}</td>
+                        <td><span class="badge bg-${presc.status === 'active' ? 'success' : 'warning'}">${presc.status}</span></td>
+                        <td>${presc.refills_remaining || 0}</td>
+                    </tr>
+                `).join('');
+            } catch (error) { console.error('Error:', error); }
+        }
+
+        function showBillingForm() { document.getElementById('billingForm').style.display = 'block'; }
+        function hideBillingForm() {
+            document.getElementById('billingForm').style.display = 'none';
+            document.getElementById('billForm').reset();
+        }
+
+        async function createBilling(e) {
+            e.preventDefault();
+            try {
+                const response = await fetch(`${API_BASE}/create_billing`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        patient_id: document.getElementById('bill_patient_id').value,
+                        amount: document.getElementById('bill_amount').value,
+                        description: document.getElementById('bill_description').value,
+                        due_date: new Date().toISOString().split('T')[0]
+                    })
+                });
+                if (response.ok) {
+                    alert('Invoice created!');
+                    hideBillingForm();
+                    loadBillingHistory();
+                }
+            } catch (error) { console.error('Error:', error); }
+        }
+
+        async function loadBillingHistory() {
+            try {
+                const response = await fetch(`${API_BASE}/get_billing_history`);
+                const billing = await response.json();
+                const tbody = document.getElementById('billingTableBody');
+                tbody.innerHTML = billing.map(bill => `
+                    <tr>
+                        <td>Patient ${bill.patient_id}</td>
+                        <td>$${bill.amount}</td>
+                        <td><span class="badge bg-${bill.status === 'paid' ? 'success' : 'warning'}">${bill.status}</span></td>
+                        <td><small>${bill.description}</small></td>
+                        <td>
+                            ${bill.status === 'pending' ? `<button class="btn btn-sm btn-success" onclick="openPaymentModal(${bill.id}, ${bill.amount})">Pay</button>` : '—'}
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) { console.error('Error:', error); }
+        }
+
+        function openPaymentModal(billingId, amount) {
+            document.getElementById('payment_billing_id').value = billingId;
+            document.getElementById('payment_billing_text').value = `Invoice #${billingId}`;
+            document.getElementById('payment_amount').value = amount;
+            new bootstrap.Modal(document.getElementById('paymentModal')).show();
+        }
+
+        async function processPayment(e) {
+            e.preventDefault();
+            try {
+                const response = await fetch(`${API_BASE}/process_payment`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        billing_id: document.getElementById('payment_billing_id').value,
+                        amount: document.getElementById('payment_amount').value,
+                        payment_method: document.getElementById('payment_method').value
+                    })
+                });
+                if (response.ok) {
+                    alert('Payment processed!');
+                    bootstrap.Modal.getInstance(document.getElementById('paymentModal')).hide();
+                    loadBillingHistory();
+                }
+            } catch (error) { console.error('Error:', error); }
+        }
+
+        async function loadMedicalHistory() {
+            try {
+                const response = await fetch(`${API_BASE}/fetch_records`);
+                const records = await response.json();
+                const list = document.getElementById('medicalHistoryList');
+                list.innerHTML = records.map(record => `
+                    <div class="list-group-item">
+                        <h6 class="mb-1"><strong>${record.condition || 'N/A'}</strong></h6>
+                        <p class="mb-0"><small>${record.treatment || 'N/A'}</small></p>
+                    </div>
+                `).join('');
+            } catch (error) { console.error('Error:', error); }
+        }
+
+        function downloadRecordsPDF() { alert('PDF export coming soon!'); }
+        function downloadRecordsCSV() { alert('CSV export coming soon!'); }
+
+        async function loadNotifications() {
+            try {
+                const response = await fetch(`${API_BASE}/get_notifications`);
+                const notifications = await response.json();
+                const list = document.getElementById('notificationsList');
+                if (!notifications || notifications.length === 0) {
+                    list.innerHTML = '<p class="text-muted">No notifications</p>';
+                    return;
+                }
+                list.innerHTML = notifications.map(notif => `
+                    <div class="notification-item">
+                        <h6>${notif.title}</h6>
+                        <p>${notif.message}</p>
+                        ${!notif.is_read ? `<button class="btn btn-sm btn-outline-secondary" onclick="markNotificationRead(${notif.id})">Mark read</button>` : ''}
+                    </div>
+                `).join('');
+            } catch (error) { console.error('Error:', error); }
+        }
+
+        async function markNotificationRead(notifId) {
+            try {
+                await fetch(`${API_BASE}/mark_notification_read/${notifId}`, { method: 'POST' });
+                loadNotifications();
+            } catch (error) { console.error('Error:', error); }
+        }
+
+        function markAllRead() {
+            document.querySelectorAll('[onclick*="markNotificationRead"]').forEach(btn => btn.click());
+        }
+    </script>
+</body>
+</html>

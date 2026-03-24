@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MediCare Pro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --info-color: #3498db;
+        }
+        body {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .login-wrapper {
+            width: 100%;
+            max-width: 450px;
+            padding: 20px;
+        }
+        .login-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .login-header i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        .login-header h1 {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 2rem;
+            margin: 0;
+        }
+        .login-header p {
+            color: #7f8c8d;
+            margin: 5px 0 0 0;
+        }
+        .role-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        .role-tab {
+            flex: 1;
+            padding: 12px;
+            background: #ecf0f1;
+            border: 2px solid transparent;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-align: center;
+            color: #34495e;
+        }
+        .role-tab:hover {
+            background: #d5dbdb;
+            border-color: var(--info-color);
+        }
+        .role-tab.active {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            color: white;
+            border-color: var(--info-color);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--info-color);
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+        }
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(44, 62, 80, 0.3);
+        }
+        .error-msg {
+            color: var(--danger-color);
+            font-weight: 500;
+            margin: 10px 0;
+            padding: 10px;
+            background: #fadbd8;
+            border-radius: 6px;
+            display: none;
+        }
+        .success-msg {
+            color: var(--success-color);
+            font-weight: 500;
+            margin: 10px 0;
+            padding: 10px;
+            background: #d5f4e6;
+            border-radius: 6px;
+            display: none;
+        }
+        .footer-text {
+            text-align: center;
+            margin-top: 20px;
+            color: #7f8c8d;
+        }
+        .footer-text a {
+            color: var(--info-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="login-card">
+            <div class="login-header">
+                <i class="fas fa-hospital-user"></i>
+                <h1>MediCare Pro</h1>
+                <p>Professional Hospital Management System</p>
+            </div>
+
+            <!-- Role Selection Tabs -->
+            <div class="role-tabs">
+                <button class="role-tab active" onclick="switchRole('doctor')">
+                    <i class="fas fa-stethoscope"></i><br><small>Doctor</small>
+                </button>
+                <button class="role-tab" onclick="switchRole('receptionist')">
+                    <i class="fas fa-user-tie"></i><br><small>Receptionist</small>
+                </button>
+                <button class="role-tab" onclick="switchRole('patient')">
+                    <i class="fas fa-user"></i><br><small>Patient</small>
+                </button>
+            </div>
+
+            <!-- Doctor Login Form -->
+            <div id="doctor-form" class="role-form">
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="doctor-email" placeholder="doctor@hospital.com">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="doctor-password" placeholder="Enter password">
+                </div>
+                <div id="doctor-error" class="error-msg"></div>
+                <button class="login-btn" onclick="login('doctor')"><i class="fas fa-sign-in-alt"></i> Login as Doctor</button>
+            </div>
+
+            <!-- Receptionist Login Form -->
+            <div id="receptionist-form" class="role-form hidden">
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="receptionist-email" placeholder="receptionist@hospital.com">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="receptionist-password" placeholder="Enter password">
+                </div>
+                <div id="receptionist-error" class="error-msg"></div>
+                <button class="login-btn" onclick="login('receptionist')"><i class="fas fa-sign-in-alt"></i> Login as Receptionist</button>
+            </div>
+
+            <!-- Patient Login Form -->
+            <div id="patient-form" class="role-form hidden">
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="patient-email" placeholder="patient@email.com">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="patient-password" placeholder="Enter password">
+                </div>
+                <div id="patient-error" class="error-msg"></div>
+                <button class="login-btn" onclick="login('patient')"><i class="fas fa-sign-in-alt"></i> Login as Patient</button>
+            </div>
+
+            <div class="footer-text">
+                Don't have an account? <a href="/register"><i class="fas fa-user-plus"></i> Register here</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchRole(role) {
+            // Hide all forms
+            document.querySelectorAll('.role-form').forEach(form => form.classList.add('hidden'));
+            document.querySelectorAll('.role-tab').forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected form and tab
+            document.getElementById(role + '-form').classList.remove('hidden');
+            event.target.closest('.role-tab').classList.add('active');
+        }
+
+        function login(role) {
+            const email = document.getElementById(role + '-email').value;
+            const password = document.getElementById(role + '-password').value;
+            const errorDiv = document.getElementById(role + '-error');
+
+            if (!email || !password) {
+                errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please fill in all fields';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            // Send login request to server
+            fetch('/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ role, email, password })
+            })
+            .then(r => {
+                if (!r.ok) {
+                    return r.json().then(data => {
+                        throw new Error(data.error || 'Login failed');
+                    });
+                }
+                return r.json();
+            })
+            .then(data => {
+                if (data.success || data.status === 'success' || data.redirect) {
+                    window.location.href = data.redirect || '/dashboard';
+                } else {
+                    errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + (data.error || 'Login failed');
+                    errorDiv.style.display = 'block';
+                }
+            })
+            .catch(err => {
+                errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + err.message;
+                errorDiv.style.display = 'block';
+            });
+        }
+    </script>
+</body>
+</html>
+
+        <!-- Demo Credentials Info -->
+        <!-- <div style="margin-top: 20px; padding: 15px; background: #ecf0f1; border-radius: 6px; border-left: 4px solid #2c3e50;">
+            <h4>📝 Demo Credentials:</h4>
+            <ul style="margin: 5px 0; padding-left: 20px;">
+                <li><strong>Doctor:</strong> doctor@hospital.com / password</li>
+                <li><strong>Receptionist:</strong> receptionist@hospital.com / password</li>
+                <li><strong>Patient:</strong> patient@hospital.com / password</li>
+            </ul>
+        </div>
+
+         Registration Link 
+        <div style="margin-top: 15px; text-align: center; padding: 15px; background: #d5f4e6; border-radius: 6px;">
+            <p style="margin: 0;">Don't have an account? <a href="/register" style="color: #27ae60; font-weight: bold; text-decoration: none;">Create one here</a></p>
+        </div> -->
+    </div>
+
+    <script>
+        function switchRole(role) {
+            // Hide all forms
+            document.querySelectorAll('.role-form').forEach(form => form.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected form and highlight tab
+            document.getElementById(role + '-form').classList.remove('hidden');
+            event.target.classList.add('active');
+            
+            // Focus on email field
+            document.getElementById(role + '-email').focus();
+        }
+
+        async function login(role) {
+            const email = document.getElementById(role + '-email').value.trim();
+            const password = document.getElementById(role + '-password').value.trim();
+            const errorDiv = document.getElementById(role + '-error');
+            
+            if (!email || !password) {
+                errorDiv.innerText = '❌ Please enter email and password';
+                return;
+            }
+
+            try {
+                const res = await fetch('/login', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({role, email, password})
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    errorDiv.innerText = '';
+                    // Redirect to dashboard
+                    window.location.href = data.redirect;
+                } else {
+                    errorDiv.innerText = '❌ ' + data.error;
+                }
+            } catch (err) {
+                errorDiv.innerText = '❌ Connection error: ' + err.message;
+            }
+        }
+
+        // Setup Enter key handling for each role
+        function setupEnterKeys(role) {
+            const emailField = document.getElementById(role + '-email');
+            const passwordField = document.getElementById(role + '-password');
+            
+            // Enter in email field → move to password
+            emailField.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    passwordField.focus();
+                }
+            });
+            
+            // Enter in password field → submit login
+            passwordField.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    login(role);
+                }
+            });
+        }
+
+        // Setup all roles
+        setupEnterKeys('doctor');
+        setupEnterKeys('receptionist');
+        setupEnterKeys('patient');
+    </script>
+</body>
+</html>

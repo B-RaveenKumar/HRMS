@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - MediCare Pro Hospital Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="fas fa-hospital-user"></i> MediCare Pro
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#patients"><i class="fas fa-users"></i> Patients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#appointments"><i class="fas fa-calendar"></i> Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#reports"><i class="fas fa-file-chart-line"></i> Reports</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle"></i> Account
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href=""><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid mt-4">
+        <!-- Dashboard Header -->
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h2 class="fw-bold"><i class="fas fa-chart-line"></i> Dashboard</h2>
+                <p class="text-muted">Welcome back! Here's your hospital overview</p>
+            </div>
+            <div class="col-md-4 text-end">
+                <div class="date-time">
+                    <p class="mb-0"><strong id="current-date"></strong></p>
+                    <p class="text-muted" id="current-time"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats Row -->
+        <div class="row mb-4">
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="stat-card">
+                    <i class="fas fa-hospital-bed"></i>
+                    <h6>Occupied Beds</h6>
+                    <h3>145</h3>
+                    <small class="text-success"><i class="fas fa-arrow-up"></i> 5% from yesterday</small>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="stat-card">
+                    <i class="fas fa-user-injured"></i>
+                    <h6>Total Patients</h6>
+                    <h3>2,341</h3>
+                    <small class="text-info"><i class="fas fa-arrow-right"></i> No change</small>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="stat-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <h6>Today's Appointments</h6>
+                    <h3>34</h3>
+                    <small class="text-warning"><i class="fas fa-hourglass-end"></i> 8 pending</small>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="stat-card">
+                    <i class="fas fa-stethoscope"></i>
+                    <h6>Available Doctors</h6>
+                    <h3>28</h3>
+                    <small class="text-secondary">On duty today</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Row -->
+        <div class="row">
+            <!-- Recent Patients -->
+            <div class="col-lg-8 mb-4">
+                <div class="professional-card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="fas fa-user-friends"></i> Recent Patients</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Patient Name</th>
+                                        <th>Age</th>
+                                        <th>Condition</th>
+                                        <th>Admission Date</th>
+                                        <th>Doctor</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>John Doe</strong></td>
+                                        <td>45</td>
+                                        <td>Hypertension</td>
+                                        <td>2026-03-20</td>
+                                        <td>Dr. Smith</td>
+                                        <td><span class="badge bg-success">Stable</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Jane Smith</strong></td>
+                                        <td>34</td>
+                                        <td>Diabetes</td>
+                                        <td>2026-03-19</td>
+                                        <td>Dr. Johnson</td>
+                                        <td><span class="badge bg-success">Stable</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Michael Brown</strong></td>
+                                        <td>67</td>
+                                        <td>Heart Disease</td>
+                                        <td>2026-03-18</td>
+                                        <td>Dr. Williams</td>
+                                        <td><span class="badge bg-warning">Critical</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Sarah Wilson</strong></td>
+                                        <td>28</td>
+                                        <td>Pregnancy</td>
+                                        <td>2026-03-17</td>
+                                        <td>Dr. Davis</td>
+                                        <td><span class="badge bg-success">Stable</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions & Notifications -->
+            <div class="col-lg-4 mb-4">
+                <div class="professional-card mb-3">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="fas fa-tasks"></i> Quick Actions</h5>
+                    </div>
+                    <div class="card-body">
+                        <button class="btn btn-primary btn-block mb-2 w-100">
+                            <i class="fas fa-user-plus"></i> Add New Patient
+                        </button>
+                        <button class="btn btn-info btn-block mb-2 w-100">
+                            <i class="fas fa-calendar-plus"></i> Schedule Appointment
+                        </button>
+                        <button class="btn btn-warning btn-block mb-2 w-100">
+                            <i class="fas fa-pills"></i> Issue Prescription
+                        </button>
+                        <button class="btn btn-danger btn-block w-100">
+                            <i class="fas fa-file-pdf"></i> Generate Report
+                        </button>
+                    </div>
+                </div>
+
+                <div class="professional-card">
+                    <div class="card-header bg-warning text-dark">
+                        <h5 class="mb-0"><i class="fas fa-bell"></i> Notifications</h5>
+                    </div>
+                    <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-circle"></i> <strong>Critical Alert:</strong> Patient ID #2041 requires immediate attention
+                        </div>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <i class="fas fa-hourglass-end"></i> <strong>Appointment Reminder:</strong> 3 patients waiting
+                        </div>
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            <i class="fas fa-info-circle"></i> <strong>Lab Results Available:</strong> 5 new test reports ready for review
+                        </div>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle"></i> <strong>System Update:</strong> Database backup completed successfully
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Sections -->
+        <div class="row mt-4">
+            <!-- Appointment Schedule -->
+            <div class="col-lg-6 mb-4">
+                <div class="professional-card">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0"><i class="fas fa-calendar"></i> Appointment Schedule</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <div class="list-group-item">
+                                <h6 class="mb-1"><strong>09:00 AM - Dr. Smith</strong></h6>
+                                <p class="mb-1 text-muted">John Doe - Hypertension Check-up</p>
+                                <small class="text-success"><i class="fas fa-check-circle"></i> Completed</small>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1"><strong>10:30 AM - Dr. Johnson</strong></h6>
+                                <p class="mb-1 text-muted">Jane Smith - Diabetes Consultation</p>
+                                <small class="text-warning"><i class="fas fa-hourglass"></i> In Progress</small>
+                            </div>
+                            <div class="list-group-item">
+                                <h6 class="mb-1"><strong>02:00 PM - Dr. Williams</strong></h6>
+                                <p class="mb-1 text-muted">Michael Brown - Heart Disease Review</p>
+                                <small class="text-secondary"><i class="fas fa-clock"></i> Upcoming</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hospital Statistics -->
+            <div class="col-lg-6 mb-4">
+                <div class="professional-card">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="mb-0"><i class="fas fa-chart-pie"></i> Hospital Statistics</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Bed Occupancy Rate</span>
+                                <strong>85%</strong>
+                            </div>
+                            <div class="progress" style="height: 25px;">
+                                <div class="progress-bar bg-success" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Average Appointment Time</span>
+                                <strong>45 min</strong>
+                            </div>
+                            <div class="progress" style="height: 25px;">
+                                <div class="progress-bar bg-primary" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Patient Satisfaction Rate</span>
+                                <strong>92%</strong>
+                            </div>
+                            <div class="progress" style="height: 25px;">
+                                <div class="progress-bar bg-info" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Staff Efficiency</span>
+                                <strong>88%</strong>
+                            </div>
+                            <div class="progress" style="height: 25px;">
+                                <div class="progress-bar bg-warning" style="width: 88%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <p>&copy; 2026 MediCare Pro - Professional Hospital Management System. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Update current date and time
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            document.getElementById('current-time').textContent = now.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit'
+            });
+        }
+        
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    </script>
+</body>
+</html>
