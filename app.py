@@ -53,7 +53,7 @@ app = Flask(__name__)
 # --- SECURITY CONFIGURATION ---
 SECRET_KEY = os.getenv("FLASK_SECRET_KEY")
 if not SECRET_KEY:
-    logger.error("❌ FLASK_SECRET_KEY not found in .env file!")
+    logger.error("FLASK_SECRET_KEY not found in .env file!")
     logger.info("   Generate a secure key: python -c \"import os; print(os.urandom(32).hex())\"")
     SECRET_KEY = "temporary-insecure-key-change-in-production"  # Temporary fallback
 

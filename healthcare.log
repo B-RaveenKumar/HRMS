@@ -311,3 +311,57 @@
 2026-03-24 14:26:35,681 - werkzeug - INFO - 127.0.0.1 - - [24/Mar/2026 14:26:35] "GET /static/style.css HTTP/1.1" 200 -
 2026-03-24 14:26:39,693 - werkzeug - INFO - 127.0.0.1 - - [24/Mar/2026 14:26:39] "GET /register HTTP/1.1" 200 -
 2026-03-24 14:26:39,730 - werkzeug - INFO - 127.0.0.1 - - [24/Mar/2026 14:26:39] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-25 20:17:09,121 - __main__ - INFO -    Generate a secure key: python -c "import os; print(os.urandom(32).hex())"
+2026-03-25 20:17:09,195 - __main__ - INFO - Database initialized successfully
+2026-03-25 20:17:09,420 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-25 20:17:09,421 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-25 20:17:09,427 - werkzeug - INFO -  * Restarting with stat
+2026-03-25 20:17:12,137 - __main__ - INFO -    Generate a secure key: python -c "import os; print(os.urandom(32).hex())"
+2026-03-25 20:17:12,144 - __main__ - INFO - Database initialized successfully
+2026-03-25 20:17:12,216 - werkzeug - WARNING -  * Debugger is active!
+2026-03-25 20:17:12,228 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-25 20:17:31,244 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-25 20:17:31,488 - werkzeug - INFO -  * Restarting with stat
+2026-03-25 20:17:34,134 - __main__ - ERROR - FLASK_SECRET_KEY not found in .env file!
+2026-03-25 20:17:34,134 - __main__ - INFO -    Generate a secure key: python -c "import os; print(os.urandom(32).hex())"
+2026-03-25 20:17:34,139 - __main__ - INFO - Database initialized successfully
+2026-03-25 20:17:34,217 - werkzeug - WARNING -  * Debugger is active!
+2026-03-25 20:17:34,227 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-25 20:19:02,254 - __main__ - ERROR - FLASK_SECRET_KEY not found in .env file!
+2026-03-25 20:19:02,254 - __main__ - INFO -    Generate a secure key: python -c "import os; print(os.urandom(32).hex())"
+2026-03-25 20:19:02,256 - __main__ - INFO - Database initialized successfully
+2026-03-25 20:19:02,332 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-25 20:19:02,332 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-25 20:19:02,335 - werkzeug - INFO -  * Restarting with stat
+2026-03-25 20:19:04,120 - __main__ - ERROR - FLASK_SECRET_KEY not found in .env file!
+2026-03-25 20:19:04,121 - __main__ - INFO -    Generate a secure key: python -c "import os; print(os.urandom(32).hex())"
+2026-03-25 20:19:04,123 - __main__ - INFO - Database initialized successfully
+2026-03-25 20:19:04,166 - werkzeug - WARNING -  * Debugger is active!
+2026-03-25 20:19:04,175 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-25 20:20:26,687 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:20:26] "GET / HTTP/1.1" 200 -
+2026-03-25 20:20:26,708 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:20:26] "GET / HTTP/1.1" 200 -
+2026-03-25 20:20:26,715 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:20:26] "GET / HTTP/1.1" 200 -
+2026-03-25 20:20:27,748 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:20:27] "GET /static/style.css HTTP/1.1" 200 -
+2026-03-25 20:20:27,759 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:20:27] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-25 20:20:27,771 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:20:27] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-25 20:20:28,556 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:20:28] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-03-25 20:20:28,580 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:20:28] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-03-25 20:20:38,864 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:20:38] "GET /register HTTP/1.1" 200 -
+2026-03-25 20:20:38,942 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:20:38] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-25 20:21:17,575 - __main__ - INFO - New user registered: raveen@gmail.com with role doctor
+2026-03-25 20:21:17,576 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:21:17] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+2026-03-25 20:21:19,758 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:21:19] "GET /login HTTP/1.1" 200 -
+2026-03-25 20:21:19,893 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:21:19] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-25 20:21:37,730 - __main__ - INFO - User logged in: raveen@gmail.com (doctor)
+2026-03-25 20:21:37,736 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:21:37] "POST /login HTTP/1.1" 200 -
+2026-03-25 20:21:37,902 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:21:37] "GET /dashboard HTTP/1.1" 200 -
+2026-03-25 20:21:37,978 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:21:37] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-25 20:21:39,084 - __main__ - WARNING - Unauthorized access attempt to get_statistics
+2026-03-25 20:21:39,086 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:21:39] "[31m[1mGET /get_statistics HTTP/1.1[0m" 401 -
+2026-03-25 20:21:47,549 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:21:47] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-03-25 20:21:47,563 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:21:47] "GET / HTTP/1.1" 200 -
+2026-03-25 20:21:47,617 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:21:47] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-25 20:22:05,733 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-25 20:22:06,101 - werkzeug - INFO -  * Restarting with stat
