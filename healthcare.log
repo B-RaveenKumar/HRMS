@@ -1482,3 +1482,40 @@
 2026-03-31 15:19:29,639 - __main__ - INFO - Dashboard data refreshed for receptionist
 2026-03-31 15:19:29,639 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:19:29] "GET /refresh_dashboard_data HTTP/1.1" 200 -
 2026-03-31 15:19:29,652 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:19:29] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:20:29,165 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:20:29,168 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:20:29] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:20:29,179 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:20:29] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:20:30,093 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:20:30,095 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:20:30] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:20:30,119 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:20:30] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:20:31,105 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:20:31] "GET /receptionist_dashboard HTTP/1.1" 200 -
+2026-03-31 15:20:31,184 - __main__ - INFO - Patient data synced - 1 records, 2 user accounts
+2026-03-31 15:20:31,185 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:20:31] "GET /get_all_patients_and_records HTTP/1.1" 200 -
+2026-03-31 15:20:39,767 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:20:39] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:20:41,187 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:20:41,188 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:20:41] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:20:41,196 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:20:41] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:20:43,305 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:20:43] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:20:44,535 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:20:44] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:20:51,190 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:20:51,192 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:20:51] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:20:51,208 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:20:51] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:20:51,370 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:20:51] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:21:17,588 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 15:21:17,763 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 15:21:17,829 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 15:21:17,874 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 15:21:18,116 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 15:21:18,169 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 15:21:20,948 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 15:21:20,953 - __main__ - INFO - Database initialized successfully
+2026-03-31 15:21:21,030 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 15:21:21,038 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 15:21:21,158 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 15:21:21,163 - __main__ - INFO - Database initialized successfully
+2026-03-31 15:21:21,231 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 15:21:21,231 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 15:21:21,235 - __main__ - INFO - Database initialized successfully
+2026-03-31 15:21:21,239 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 15:21:21,303 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 15:21:21,310 - werkzeug - INFO -  * Debugger PIN: 105-661-874
