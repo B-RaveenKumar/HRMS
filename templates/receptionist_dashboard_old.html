@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receptionist Dashboard - MediCare Pro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --info-color: #3498db;
+        }
+        
+        body {
+            background: #ecf0f1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+        
+        .sidebar {
+            background: white;
+            border-right: 2px solid #bdc3c7;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar-menu li {
+            margin: 10px 0;
+        }
+        
+        .sidebar-menu a {
+            display: block;
+            padding: 12px 15px;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            color: white;
+        }
+        
+        .main-content {
+            padding: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .stat-card h3 {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .data-table {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            color: white;
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background: #34495e;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(44,62,80,0.25);
+        }
+        
+        .section-content {
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .badge-status {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.85rem;
+        }
+        
+        table {
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="fas fa-hospital-user"></i> MediCare Pro - Receptionist Portal
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="loadDashboard()"><i class="fas fa-bell"></i> Notifications <span class="badge bg-danger" id="notif-count">0</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle"></i> {{ user_name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 sidebar">
+                <ul class="sidebar-menu">
+                    <li><a onclick="showSection('dashboard')" class="active"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li><a onclick="showSection('patients')"><i class="fas fa-users"></i> Patients</a></li>
+                    <li><a onclick="showSection('appointments')"><i class="fas fa-calendar"></i> Appointments</a></li>
+                    <li><a onclick="showSection('billing')"><i class="fas fa-receipt"></i> Billing</a></li>
+                    <li><a onclick="showSection('prescriptions')"><i class="fas fa-pills"></i> Prescriptions</a></li>
+                    <li><a onclick="showSection('doctors')"><i class="fas fa-user-md"></i> Doctors</a></li>
+                </ul>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-10 main-content">
+                <!-- Dashboard Section -->
+                <section id="dashboard" class="section-content">
+                    <div class="row mb-4">
+                        <div class="col-md-8">
+                            <h2 class="fw-bold"><i class="fas fa-chart-line text-success"></i> Welcome, {{ user_name }}</h2>
+                            <p class="text-muted">Hospital Management & Operations Dashboard</p>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <p class="mb-0"><strong id="current-date"></strong></p>
+                            <p class="text-muted" id="current-time"></p>
+                        </div>
+                    </div>
+
+                    <!-- Statistics -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="stat-card">
+                                <i class="fas fa-users"></i>
+                                <h3 id="stat-patients">0</h3>
+                                <p>Total Patients</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card">
+                                <i class="fas fa-calendar-check"></i>
+                                <h3 id="stat-appointments">0</h3>
+                                <p>Today's Appointments</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card">
+                                <i class="fas fa-money-bill"></i>
+                                <h3 id="stat-revenue">₹0</h3>
+                                <p>Pending Revenue</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card">
+                                <i class="fas fa-bed"></i>
+                                <h3 id="stat-beds">0</h3>
+                                <p>Available Beds</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="data-table">
+                                <h5 class="fw-bold"><i class="fas fa-tasks"></i> Quick Actions</h5>
+                                <button class="btn btn-primary w-100 mb-2" onclick="showSection('patients'); openAddPatientModal()">
+                                    <i class="fas fa-user-plus"></i> Register New Patient
+                                </button>
+                                <button class="btn btn-primary w-100 mb-2" onclick="showSection('appointments')">
+                                    <i class="fas fa-calendar-plus"></i> Schedule Appointment
+                                </button>
+                                <button class="btn btn-primary w-100" onclick="showSection('billing')">
+                                    <i class="fas fa-file-invoice"></i> Create Invoice
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="data-table">
+                                <h5 class="fw-bold"><i class="fas fa-bell"></i> Recent Activity</h5>
+                                <div id="recent-activity">
+                                    <p class="text-muted">No recent activity</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Patients Section -->
+                <section id="patients" class="section-content hidden">
+                    <div class="row mb-4">
+                        <div class="col-md-8">
+                            <h2 class="fw-bold"><i class="fas fa-users"></i> Patient Records</h2>
+                            <p class="text-muted">Manage all patient information</p>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <button class="btn btn-primary" onclick="openAddPatientModal()">
+                                <i class="fas fa-user-plus"></i> Add Patient
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="data-table">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Search patients by name or ID..." id="patient-search"
+                                   onkeyup="filterPatients()">
+                            <button class="btn btn-outline-secondary" type="button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="patients-table">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Age</th>
+                                        <th>Condition</th>
+                                        <th>Admission Date</th>
+                                        <th>Fees</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="patients-tbody">
+                                    <tr><td colspan="7" class="text-center text-muted">Loading patients...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Appointments Section -->
+                <section id="appointments" class="section-content hidden">
+                    <h2 class="fw-bold mb-4"><i class="fas fa-calendar"></i> Appointments</h2>
+                    
+                    <div class="data-table">
+                        <ul class="nav nav-tabs mb-3" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" onclick="filterAppointments('all')">All</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" onclick="filterAppointments('scheduled')">Scheduled</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" onclick="filterAppointments('completed')">Completed</a>
+                            </li>
+                        </ul>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="appointments-table">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Patient</th>
+                                        <th>Doctor</th>
+                                        <th>Reason</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="appointments-tbody">
+                                    <tr><td colspan="7" class="text-center text-muted">Loading appointments...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Billing Section -->
+                <section id="billing" class="section-content hidden">
+                    <div class="row mb-4">
+                        <div class="col-md-8">
+                            <h2 class="fw-bold"><i class="fas fa-receipt"></i> Billing & Payments</h2>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <button class="btn btn-primary" onclick="openCreateBillingModal()">
+                                <i class="fas fa-file-invoice-dollar"></i> Create Invoice
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="data-table">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="billing-table">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Invoice ID</th>
+                                        <th>Patient</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Due Date</th>
+                                        <th>Created</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="billing-tbody">
+                                    <tr><td colspan="7" class="text-center text-muted">Loading billing records...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Prescriptions Section -->
+                <section id="prescriptions" class="section-content hidden">
+                    <h2 class="fw-bold mb-4"><i class="fas fa-pills"></i> Prescriptions</h2>
+                    
+                    <div class="data-table">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="prescriptions-table">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Patient</th>
+                                        <th>Doctor</th>
+                                        <th>Medication</th>
+                                        <th>Dosage</th>
+                                        <th>Frequency</th>
+                                        <th>Status</th>
+                                        <th>Issued Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="prescriptions-tbody">
+                                    <tr><td colspan="7" class="text-center text-muted">Loading prescriptions...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Doctors Section -->
+                <section id="doctors" class="section-content hidden">
+                    <h2 class="fw-bold mb-4"><i class="fas fa-user-md"></i> Doctor Availability</h2>
+                    
+                    <div class="data-table">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="doctors-table">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Doctor Name</th>
+                                        <th>Specialty</th>
+                                        <th>Hospital</th>
+                                        <th>Status</th>
+                                        <th>Working Hours</th>
+                                        <th>Queue</th>
+                                        <th>Available Slots</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="doctors-tbody">
+                                    <tr><td colspan="7" class="text-center text-muted">Loading doctors...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Patient Modal -->
+    <div class="modal fade" id="patientModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-user-plus"></i> Add Patient</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="patientForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Patient Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="patient-name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Patient ID</label>
+                                <input type="number" class="form-control" id="patient-id">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Age <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="patient-age" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Phone <span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="patient-phone" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Disease/Condition <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="patient-disease" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Date of Admission</label>
+                                <input type="date" class="form-control" id="patient-admit-date">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Stay Duration (days)</label>
+                                <input type="number" class="form-control" id="patient-stay-days">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Fees (₹)</label>
+                            <input type="number" class="form-control" id="patient-fees" step="0.01">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="savePatient()">Save Patient</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Billing Modal -->
+    <div class="modal fade" id="billingModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-file-invoice"></i> Create Invoice</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="billingForm">
+                        <div class="mb-3">
+                            <label class="form-label">Patient <span class="text-danger">*</span></label>
+                            <select class="form-control" id="billing-patient" required>
+                                <option>Select Patient</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Amount (₹) <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="billing-amount" step="0.01" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" id="billing-description" rows="3"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Due Date</label>
+                            <input type="date" class="form-control" id="billing-due-date">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="saveBilling()">Create Invoice</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let patientsList = [];
+        let appointmentsList = [];
+        let billingList = [];
+        let prescriptionsList = [];
+        let doctorsList = [];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+            loadDashboard();
+        });
+
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            document.getElementById('current-time').textContent = now.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        async function loadDashboard() {
+            loadPatients();
+            loadAppointments();
+            loadBilling();
+            loadPrescriptions();
+            loadDoctors();
+            loadStatistics();
+        }
+
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section-content').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.querySelectorAll('.sidebar-menu a').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.remove('hidden');
+            event.target.classList.add('active');
+        }
+
+        async function loadPatients() {
+            try {
+                const response = await fetch('/fetch_records');
+                if (response.ok) {
+                    patientsList = await response.json();
+                    displayPatients();
+                    document.getElementById('stat-patients').textContent = patientsList.length;
+                    updateBillingPatientList();
+                }
+            } catch (error) {
+                console.error('Error loading patients:', error);
+            }
+        }
+
+        function displayPatients() {
+            const tbody = document.getElementById('patients-tbody');
+            if (patientsList.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted">No patients found</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = patientsList.map(patient => `
+                <tr>
+                    <td>#${patient[0]}</td>
+                    <td>${patient[1]}</td>
+                    <td>${patient[2]} years</td>
+                    <td>${patient[3]}</td>
+                    <td>${patient[4]}</td>
+                    <td>₹${patient[6]}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn btn-sm btn-info" onclick="viewPatient(${patient[0]})" title="View">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-warning" onclick="editPatient(${patient[0]})" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="deletePatient(${patient[0]})" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function filterPatients() {
+            const searchTerm = document.getElementById('patient-search').value.toLowerCase();
+            const filtered = patientsList.filter(p => 
+                p[1].toLowerCase().includes(searchTerm) || 
+                p[0].toString().includes(searchTerm)
+            );
+            patientsList = filtered;
+            displayPatients();
+        }
+
+        async function loadAppointments() {
+            try {
+                const response = await fetch('/get_appointments');
+                if (response.ok) {
+                    const data = await response.json();
+                    appointmentsList = data.appointments || [];
+                    displayAppointments('all');
+                    const today = new Date().toISOString().split('T')[0];
+                    const todayCount = appointmentsList.filter(a => a.date === today).length;
+                    document.getElementById('stat-appointments').textContent = todayCount;
+                }
+            } catch (error) {
+                console.error('Error loading appointments:', error);
+            }
+        }
+
+        function displayAppointments(filter = 'all') {
+            const tbody = document.getElementById('appointments-tbody');
+            let filtered = appointmentsList;
+            if (filter !== 'all') {
+                filtered = appointmentsList.filter(a => a.status === filter);
+            }
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted">No appointments found</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(apt => `
+                <tr>
+                    <td>${apt.date}</td>
+                    <td>${apt.time}</td>
+                    <td>${apt.participant}</td>
+                    <td>${apt.hospital}</td>
+                    <td>${apt.reason || 'Not specified'}</td>
+                    <td><span class="badge bg-${apt.status === 'scheduled' ? 'success' : 'secondary'}">${apt.status}</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" onclick="cancelAppointment(${apt.id})" title="Cancel">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function filterAppointments(status) {
+            displayAppointments(status);
+            document.querySelectorAll('#appointments .nav-link').forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        async function loadBilling() {
+            try {
+                const response = await fetch('/get_billing_history');
+                if (response.ok) {
+                    const data = await response.json();
+                    billingList = data.billing_history || [];
+                    displayBilling();
+                    document.getElementById('stat-revenue').textContent = '₹' + data.total_outstanding.toFixed(2);
+                }
+            } catch (error) {
+                console.error('Error loading billing:', error);
+            }
+        }
+
+        function displayBilling() {
+            const tbody = document.getElementById('billing-tbody');
+            if (billingList.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted">No billing records</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = billingList.map(bill => `
+                <tr>
+                    <td>#${bill.id}</td>
+                    <td>Patient ${bill.id}</td>
+                    <td>₹${bill.amount.toFixed(2)}</td>
+                    <td><span class="badge bg-${bill.status === 'paid' ? 'success' : 'warning'}">${bill.status}</span></td>
+                    <td>${bill.due_date || 'Not set'}</td>
+                    <td>${new Date(bill.created_at).toLocaleDateString()}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="viewBilling(${bill.id})" title="View">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        async function loadPrescriptions() {
+            try {
+                const response = await fetch('/get_prescriptions');
+                if (response.ok) {
+                    const data = await response.json();
+                    prescriptionsList = data.prescriptions || [];
+                    displayPrescriptions();
+                }
+            } catch (error) {
+                console.error('Error loading prescriptions:', error);
+            }
+        }
+
+        function displayPrescriptions() {
+            const tbody = document.getElementById('prescriptions-tbody');
+            if (prescriptionsList.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted">No prescriptions</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = prescriptionsList.slice(0, 10).map(rx => `
+                <tr>
+                    <td>Patient</td>
+                    <td>Doctor</td>
+                    <td>${rx.medication}</td>
+                    <td>${rx.dosage}</td>
+                    <td>${rx.frequency}</td>
+                    <td><span class="badge bg-${rx.status === 'active' ? 'success' : 'secondary'}">${rx.status}</span></td>
+                    <td>${rx.issued_date}</td>
+                </tr>
+            `).join('');
+        }
+
+        async function loadDoctors() {
+            try {
+                const response = await fetch('/get_all_hospitals');
+                if (response.ok) {
+                    const data = await response.json();
+                    const hospitals = data.hospitals || [];
+                    document.getElementById('stat-beds').textContent = data.hospitals.reduce((sum, h) => sum + h.available_beds, 0);
+                }
+            } catch (error) {
+                console.error('Error loading doctors:', error);
+            }
+        }
+
+        function displayDoctors() {
+            const tbody = document.getElementById('doctors-tbody');
+            // This would normally be populated from the API
+            tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted">Loading...</td></tr>';
+        }
+
+        function loadStatistics() {
+            // Updates dashboard statistics
+        }
+
+        function updateBillingPatientList() {
+            const select = document.getElementById('billing-patient');
+            select.innerHTML = '<option>Select Patient</option>';
+            patientsList.forEach(p => {
+                select.innerHTML += `<option value="${p[0]}">${p[1]}</option>`;
+            });
+        }
+
+        function openAddPatientModal() {
+            document.getElementById('patientForm').reset();
+            const modal = new bootstrap.Modal(document.getElementById('patientModal'));
+            modal.show();
+        }
+
+        async function savePatient() {
+            const patientData = {
+                sno: document.getElementById('patient-id').value || Date.now(),
+                name: document.getElementById('patient-name').value,
+                age: document.getElementById('patient-age').value,
+                disease: document.getElementById('patient-disease').value,
+                date: document.getElementById('patient-admit-date').value,
+                stay: document.getElementById('patient-stay-days').value,
+                fees: document.getElementById('patient-fees').value
+            };
+
+            if (!patientData.name || !patientData.age || !patientData.disease) {
+                alert('❌ Please fill required fields');
+                return;
+            }
+
+            try {
+                const response = await fetch('/save_data', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(patientData)
+                });
+
+                if (response.ok) {
+                    alert('✅ Patient saved successfully');
+                    bootstrap.Modal.getInstance(document.getElementById('patientModal')).hide();
+                    loadPatients();
+                } else {
+                    const error = await response.json();
+                    alert('❌ ' + (error.error || 'Failed to save'));
+                }
+            } catch (error) {
+                alert('❌ Error: ' + error.message);
+            }
+        }
+
+        function editPatient(patientId) {
+            const patient = patientsList.find(p => p[0] === patientId);
+            if (!patient) return;
+
+            document.getElementById('patient-id').value = patient[0];
+            document.getElementById('patient-name').value = patient[1];
+            document.getElementById('patient-age').value = patient[2];
+            document.getElementById('patient-disease').value = patient[3];
+            document.getElementById('patient-admit-date').value = patient[4];
+            document.getElementById('patient-stay-days').value = patient[5];
+            document.getElementById('patient-fees').value = patient[6];
+
+            const modal = new bootstrap.Modal(document.getElementById('patientModal'));
+            modal.show();
+        }
+
+        async function deletePatient(patientId) {
+            if (!confirm('Delete this patient record?')) return;
+            try {
+                const response = await fetch(`/delete_record/${patientId}`, { method: 'DELETE' });
+                if (response.ok) {
+                    alert('✅ Patient deleted');
+                    loadPatients();
+                }
+            } catch (error) {
+                alert('❌ Error: ' + error.message);
+            }
+        }
+
+        function openCreateBillingModal() {
+            document.getElementById('billingForm').reset();
+            const modal = new bootstrap.Modal(document.getElementById('billingModal'));
+            modal.show();
+        }
+
+        async function saveBilling() {
+            const billingData = {
+                patient_id: document.getElementById('billing-patient').value,
+                amount: document.getElementById('billing-amount').value,
+                description: document.getElementById('billing-description').value,
+                due_date: document.getElementById('billing-due-date').value
+            };
+
+            if (!billingData.patient_id || !billingData.amount) {
+                alert('❌ Please fill required fields');
+                return;
+            }
+
+            try {
+                const response = await fetch('/create_billing', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(billingData)
+                });
+
+                if (response.ok) {
+                    alert('✅ Invoice created');
+                    bootstrap.Modal.getInstance(document.getElementById('billingModal')).hide();
+                    loadBilling();
+                }
+            } catch (error) {
+                alert('❌ Error: ' + error.message);
+            }
+        }
+
+        function viewPatient(patientId) {
+            alert('View patient details for ID: ' + patientId);
+        }
+
+        function viewBilling(billingId) {
+            alert('View billing details for ID: ' + billingId);
+        }
+
+        async function cancelAppointment(appointmentId) {
+            if (!confirm('Cancel this appointment?')) return;
+            try {
+                const response = await fetch(`/cancel_appointment/${appointmentId}`, { method: 'DELETE' });
+                if (response.ok) {
+                    alert('✅ Appointment cancelled');
+                    loadAppointments();
+                }
+            } catch (error) {
+                alert('❌ Error: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>

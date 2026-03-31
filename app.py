@@ -3,16 +3,17 @@ import os
 import json
 import logging
 import re
-import bcrypt
 from functools import wraps
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, make_response
 from openai import OpenAI
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
 import stripe
+import bcrypt
 import hashlib
 from collections import defaultdict
 import time
+import requests
 
 load_dotenv()
 
@@ -27,24 +28,35 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Configure OpenAI API client (lazy initialization)
+# Configure OpenRouter API client (OpenAI-compatible)
 api_key_openai = os.getenv("OPENAI_API_KEY")
 if not api_key_openai:
-    print("⚠️  WARNING: OPENAI_API_KEY not found in .env file!")
-    print("   📋 Run: python setup_api.py")
-    api_key_openai = "placeholder"
+    logger.warning("⚠️  OPENAI_API_KEY not found in .env file!")
+    logger.info("   AI Chatbot will be disabled")
+    api_key_openai = None
+else:
+    logger.info("[OK] OpenRouter API key loaded successfully")
 
 # Lazy initialize the client to avoid SSL issues on startup
 client = None
 
 def get_openai_client():
-    """Get or create the OpenAI client (lazy initialization)"""
+    """Get or create OpenRouter API client (OpenAI-compatible)"""
     global client
-    if client is None:
+    if client is None and api_key_openai:
         try:
-            client = OpenAI(api_key=api_key_openai)
+            # OpenRouter is OpenAI-compatible, use base_url
+            client = OpenAI(
+                api_key=api_key_openai,
+                base_url="https://openrouter.io/api/v1",
+                default_headers={
+                    "HTTP-Referer": "http://localhost:5000",
+                    "X-Title": "Hospital Management System"
+                }
+            )
+            logger.info("[OK] OpenRouter API client initialized successfully")
         except Exception as e:
-            logger.warning(f"Failed to initialize OpenAI client: {e}")
+            logger.warning(f"Failed to initialize OpenRouter client: {e}")
             return None
     return client
 
@@ -125,8 +137,9 @@ def require_role(*allowed_roles):
     def decorator(f):
         @wraps(f)
         def decorated_function(*args, **kwargs):
-            if 'role' not in session or session['role'] not in allowed_roles:
-                logger.warning(f"Forbidden access attempt - role {session.get('role')} to {request.endpoint}")
+            user_role = session.get('role', None)
+            if not user_role or user_role not in allowed_roles:
+                logger.warning(f"Forbidden access attempt - role {user_role} to {request.endpoint}")
                 return jsonify({"error": f"Forbidden - this action requires role: {', '.join(allowed_roles)}"}), 403
             return f(*args, **kwargs)
         return decorated_function
@@ -422,6 +435,65 @@ def init_hospital_data():
 
 init_hospital_data()
 
+# --- INITIALIZE TEST USERS ---
+def init_test_users():
+    """Create test users for demo"""
+    conn = sqlite3.connect('healthcare.db')
+    cursor = conn.cursor()
+    
+    try:
+        # Check if test users already exist
+        cursor.execute("SELECT COUNT(*) FROM users WHERE email = ?", ("doctor@hospital.com",))
+        if cursor.fetchone()[0] > 0:
+            conn.close()
+            return  # Users already exist
+        
+        # Create test users
+        test_users = [
+            ('doctor', 'doctor@hospital.com', 'Doctor@123', 'Dr. John Smith', '555-0100'),
+            ('receptionist', 'receptionist@hospital.com', 'Receptionist@123', 'Jane Doe', '555-0200'),
+            ('patient', 'patient@hospital.com', 'Patient@123', 'John Patient', '555-0300')
+        ]
+        
+        for role, email, password, name, phone in test_users:
+            hashed_password = hash_password(password)
+            
+            profile_data = json.dumps({
+                'phone': phone,
+                'role_specific': {
+                    'doctor': {
+                        'license': 'LIC-2024-001',
+                        'specialization': 'General Medicine',
+                        'experience': '10 years'
+                    },
+                    'receptionist': {
+                        'department': 'Front Desk',
+                        'shift': 'Morning'
+                    },
+                    'patient': {
+                        'dob': '1990-01-15',
+                        'gender': 'Male',
+                        'address': '123 Main St, City',
+                        'blood_type': 'O+',
+                        'medical_conditions': 'None'
+                    }
+                }.get(role, {})
+            })
+            
+            cursor.execute('''INSERT INTO users (role, email, password, name, phone, profile_data) 
+                              VALUES (?, ?, ?, ?, ?, ?)''',
+                          (role, email, hashed_password, name, phone, profile_data))
+        
+        conn.commit()
+        logger.info("Test users created successfully")
+    
+    except Exception as e:
+        logger.warning(f"Test users already exist or error: {e}")
+    finally:
+        conn.close()
+
+init_test_users()
+
 # --- 3. ROUTES ---
 
 @app.route('/')
@@ -430,7 +502,7 @@ def index():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    """Handle user registration with password hashing"""
+    """Handle user registration with password hashing AND patient record creation"""
     if request.method == 'GET':
         return render_template('register.html')
     
@@ -503,6 +575,19 @@ def register():
                           (role, email, hashed_password, name, phone, profile_data))
             conn.commit()
             user_id = cursor.lastrowid
+            
+            # If registering as patient, also create a medical record
+            if role == 'patient':
+                try:
+                    record_id = int(datetime.now().timestamp() * 1000)
+                    phone_clean = phone if phone else '0000000000'
+                    cursor.execute("INSERT INTO records (id, name, age, disease, admit_date, stay_days, fees) VALUES (?,?,?,?,?,?,?)",
+                                   (record_id, name, 0, 'New Patient Registration', datetime.now().strftime('%Y-%m-%d'), 0, 0))
+                    conn.commit()
+                    logger.info(f"Patient medical record created: {name} (ID: {record_id})")
+                except Exception as e:
+                    logger.warning(f"Could not create medical record for patient {email}: {e}")
+            
             conn.close()
             
             logger.info(f"New user registered: {email} with role {role}")
@@ -532,14 +617,35 @@ def login():
     
     # Handle POST request
     try:
-        data = request.json
+        # Get data from either JSON or form data
+        if request.is_json:
+            data = request.json or {}
+        else:
+            data = request.form.to_dict() or {}
+        
         role = data.get('role', '').lower().strip()
         email = data.get('email', '').lower().strip()
         password = data.get('password', '').strip()
         
         # Validate inputs
-        if not all([role, email, password]):
-            return jsonify({"error": "Missing required fields"}), 400
+        if not all([email, password]):
+            return jsonify({"error": "Missing email or password"}), 400
+        
+        # If role is not provided, try to find it from the database
+        if not role:
+            try:
+                conn = sqlite3.connect('healthcare.db')
+                cursor = conn.cursor()
+                cursor.execute('SELECT role FROM users WHERE email = ? LIMIT 1', (email,))
+                result = cursor.fetchone()
+                conn.close()
+                if result:
+                    role = result[0]
+                else:
+                    return jsonify({"error": "User not found"}), 401
+            except Exception as e:
+                logger.error(f"Role lookup error: {e}")
+                return jsonify({"error": "Login error"}), 500
         
         # Validate role exists
         if role not in ['doctor', 'receptionist', 'patient']:
@@ -569,10 +675,17 @@ def login():
                     
                     logger.info(f"User logged in: {email} ({role})")
                     
+                    # Redirect to appropriate dashboard based on role
+                    redirect_url = {
+                        'doctor': '/doctor_dashboard',
+                        'receptionist': '/receptionist_dashboard',
+                        'patient': '/patient_dashboard'
+                    }.get(role, '/dashboard')
+                    
                     return jsonify({
                         "success": True,
                         "message": f"Welcome {name}!",
-                        "redirect": "/dashboard"
+                        "redirect": redirect_url
                     }), 200
         except Exception as e:
             logger.error(f"Login database error: {e}")
@@ -592,7 +705,44 @@ def dashboard():
         return redirect(url_for('index'))
     
     role = session.get('role')
+    user_id = session.get('user_id')
+    user_name = session.get('name')
+    
+    if role == 'doctor':
+        return redirect(url_for('doctor_dashboard'))
+    elif role == 'receptionist':
+        return redirect(url_for('receptionist_dashboard'))
+    elif role == 'patient':
+        return redirect(url_for('patient_dashboard'))
+    
     return render_template('dashboard.html', role=role)
+
+@app.route('/doctor_dashboard')
+@require_login
+@require_role('doctor')
+def doctor_dashboard():
+    """Doctor dashboard - view and manage patients"""
+    user_id = session.get('user_id')
+    user_name = session.get('name')
+    return render_template('doctor_dashboard.html', user_name=user_name, user_id=user_id)
+
+@app.route('/receptionist_dashboard')
+@require_login
+@require_role('receptionist')
+def receptionist_dashboard():
+    """Receptionist dashboard - manage patient records"""
+    user_name = session.get('name')
+    return render_template('receptionist_dashboard.html', user_name=user_name)
+
+@app.route('/patient_dashboard')
+@require_login
+@require_role('patient')
+def patient_dashboard():
+    """Patient dashboard - profile, prescriptions, chatbot"""
+    user_id = session.get('user_id')
+    user_name = session.get('name')
+    user_email = session.get('email')
+    return render_template('patient_dashboard.html', user_name=user_name, user_id=user_id, user_email=user_email)
 
 @app.route('/logout')
 def logout():
@@ -600,39 +750,179 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 
+# --- FALLBACK AI RESPONSES ---
+def get_fallback_ai_response(user_message):
+    """Provide basic medical advice when API is unavailable"""
+    message_lower = user_message.lower()
+    
+    # Common health queries with responses
+    responses = {
+        'headache': 'For a headache: Rest in a quiet, dark room. Stay hydrated. Try over-the-counter pain relievers if needed. If it persists for more than 2 days or is severe, consult a doctor.',
+        'cold': 'For a cold: Rest, stay hydrated, use saline nasal drops, and try to avoid contact with others. Most colds resolve within 7-10 days. See a doctor if symptoms worsen.',
+        'fever': 'For a fever: Rest, drink plenty of fluids, and use cool compresses. You can take fever-reducing medication as directed. If fever is above 103°F or lasts more than 3 days, consult a doctor.',
+        'cough': 'For a cough: Stay hydrated, use honey (if over 1 year old), use cough drops, and avoid irritants. See a doctor if cough lasts more than 2 weeks or produces blood.',
+        'sore throat': 'For a sore throat: Gargle with salt water, drink warm fluids, use throat lozenges, and rest your voice. Take pain relievers if needed. See a doctor if it persists beyond 1 week.',
+        'stomach': 'For stomach issues: Eat light meals, stay hydrated with clear fluids, avoid dairy and high-fat foods. If symptoms persist more than 24 hours or worsen, consult a doctor.',
+        'blood pressure': 'For blood pressure concerns: Monitor regularly, reduce salt intake, exercise regularly, manage stress, and maintain a healthy weight. Always consult with your doctor for proper management.',
+        'diabetes': 'For diabetes management: Monitor blood sugar levels, follow a balanced diet, exercise regularly, take medications as prescribed, and have regular check-ups with your doctor.',
+        'appointment': 'To schedule an appointment: Contact our reception desk or use the appointment booking feature in the dashboard. Our receptionists are happy to help you find a convenient time.',
+    }
+    
+    # Check if message contains key words
+    for keyword, response in responses.items():
+        if keyword in message_lower:
+            return response
+    
+    # Default response
+    return """I'm currently having trouble connecting to my advanced AI system, but I can still help with basic health information.
+
+For specific medical concerns, I recommend:
+1. Consulting with one of our doctors
+2. Calling our helpline
+3. Visiting our clinic for an in-person consultation
+
+Our medical team is always available to provide personalized care and advice. Would you like to schedule an appointment?"""
+
 # This route is now only called by the Patient's chat UI
 @app.route('/ai_engine', methods=['POST'])
+@require_login
+@require_role('patient')
 def ai_engine():
-    user_query = request.json.get("message", "").lower()
-    intent = classify_intent(user_query)
-    replies = {
-        "availability": "The doctor is currently available in the clinic.",
-        "first_aid": "Rest and keep hydrated. Consult the doctor for medicine.",
-        "location": "Our partner hospital is Metro General.",
-        "general": "How can I help you today?"
-    }
-    return jsonify({"reply": replies.get(intent, "How can I help you today?")})
+    """AI chatbot using OpenRouter API via direct HTTP requests"""
+    try:
+        data = request.json
+        user_message = data.get("message", "").strip()
+        user_id = session.get('user_id')
+        
+        if not user_message:
+            return jsonify({"error": "Message cannot be empty"}), 400
+        
+        if not api_key_openai:
+            logger.warning("OpenRouter API not configured")
+            return jsonify({
+                "reply": "AI Assistant is currently unavailable. Please consult with a doctor.",
+                "source": "fallback"
+            }), 200
+        
+        try:
+            # Direct HTTP request to OpenRouter
+            headers = {
+                "Authorization": f"Bearer {api_key_openai}",
+                "HTTP-Referer": "http://localhost:5000",
+                "X-Title": "Hospital Management System",
+                "Content-Type": "application/json"
+            }
+            
+            payload = {
+                "model": "gpt-3.5-turbo",
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": """You are a helpful medical assistant chatbot for a hospital. 
+                        Provide health-related advice and information to patients. 
+                        Always recommend consulting with a doctor for serious concerns.
+                        Keep responses concise and professional. Maximum 3 paragraphs."""
+                    },
+                    {
+                        "role": "user",
+                        "content": user_message
+                    }
+                ],
+                "temperature": 0.7,
+                "max_tokens": 300
+            }
+            
+            response = requests.post(
+                "https://openrouter.io/api/v1/chat/completions",
+                headers=headers,
+                json=payload,
+                timeout=30
+            )
+            
+            if response.status_code == 200:
+                response_data = response.json()
+                ai_reply = response_data.get("choices", [{}])[0].get("message", {}).get("content", "")
+                
+                if not ai_reply:
+                    ai_reply = "I couldn't generate a response. Please try again."
+                
+                # Store conversation in database
+                try:
+                    conn = sqlite3.connect('healthcare.db')
+                    cursor = conn.cursor()
+                    cursor.execute('''INSERT INTO conversations 
+                                     (sender_id, sender_role, sender_name, recipient_id, recipient_role, 
+                                      recipient_name, message, is_read)
+                                     VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
+                                  (user_id, 'patient', session.get('name', 'Patient'), 
+                                   'ai', 'assistant', 'AI Assistant', user_message, 0))
+                    cursor.execute('''INSERT INTO conversations 
+                                     (sender_id, sender_role, sender_name, recipient_id, recipient_role, 
+                                      recipient_name, message, is_read)
+                                     VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
+                                  ('ai', 'assistant', 'AI Assistant', user_id, 'patient', 
+                                   session.get('name', 'Patient'), ai_reply, 1))
+                    conn.commit()
+                    conn.close()
+                except Exception as e:
+                    logger.warning(f"Could not save conversation: {e}")
+                
+                logger.info(f"AI response generated for patient {user_id}")
+                return jsonify({
+                    "reply": ai_reply,
+                    "source": "openrouter"
+                }), 200
+            else:
+                error_msg = response.text
+                logger.error(f"OpenRouter API error {response.status_code}: {error_msg}")
+                # Use fallback response
+                fallback_reply = get_fallback_ai_response(user_message)
+                return jsonify({
+                    "reply": fallback_reply,
+                    "source": "fallback",
+                    "error": f"API temporarily unavailable (Status {response.status_code})"
+                }), 200
+        
+        except requests.exceptions.Timeout:
+            logger.error("OpenRouter API timeout")
+            return jsonify({
+                "reply": "Request timed out. Please try again.",
+                "error": "Timeout"
+            }), 200
+        except Exception as e:
+            logger.error(f"OpenRouter API error: {str(e)}")
+            return jsonify({
+                "reply": "Sorry, I encountered an error. Please try again later.",
+                "error": str(e)
+            }), 200
+    
+    except Exception as e:
+        logger.error(f"AI Engine error: {e}")
+        return jsonify({"error": str(e), "reply": "Error processing request"}), 500
 
 @app.route('/save_data', methods=['POST'])
 @require_login
+@require_role('receptionist', 'doctor')
 def save_data():
-    """Save patient record with validation"""
+    """Save patient record AND create user account with validation"""
     try:
         d = request.json
         
-        # Validate required fields
-        if not all([d.get('sno'), d.get('name'), d.get('age'), d.get('disease'), d.get('date'), d.get('stay'), d.get('fees')]):
-            return jsonify({"error": "Missing required fields"}), 400
+        # Validate required fields (only name, age, disease are truly required)
+        if not all([d.get('name'), d.get('age'), d.get('disease')]):
+            return jsonify({"error": "Name, age, and disease are required"}), 400
         
-        # Validate and sanitize inputs
+        # Validate and sanitize inputs with defaults for optional fields
         try:
-            record_id = int(d['sno'])
+            record_id = int(d.get('sno', 0)) or int(datetime.now().timestamp() * 1000)
             name = sanitize_input(d['name'])
             age = int(d['age'])
             disease = sanitize_input(d['disease'])
-            admit_date = d['date']
-            stay_days = int(d['stay'])
-            fees = float(d['fees'])
+            admit_date = d.get('date', datetime.now().strftime('%Y-%m-%d'))
+            stay_days = int(d.get('stay', 0)) if d.get('stay') else 0
+            fees = float(d.get('fees', 0)) if d.get('fees') else 0
+            email = d.get('email', f'patient_{record_id}@hospital.local').lower().strip()
+            phone = d.get('phone', '0000000000').strip()
         except ValueError as e:
             return jsonify({"error": f"Invalid data format: {str(e)}"}), 400
         
@@ -646,13 +936,53 @@ def save_data():
         
         conn = sqlite3.connect('healthcare.db')
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO records (id, name, age, disease, admit_date, stay_days, fees) VALUES (?,?,?,?,?,?,?)",
-                       (record_id, name, age, disease, admit_date, stay_days, int(fees)))
-        conn.commit()
-        conn.close()
         
-        logger.info(f"Patient record created: {name} (ID: {record_id})")
-        return jsonify({"status": "success", "message": "Patient record saved"}), 201
+        try:
+            # Insert patient medical record
+            cursor.execute("INSERT INTO records (id, name, age, disease, admit_date, stay_days, fees) VALUES (?,?,?,?,?,?,?)",
+                           (record_id, name, age, disease, admit_date, stay_days, int(fees)))
+            
+            # Also create a user account so patient can login (if not exists)
+            try:
+                # Check if patient user already exists
+                cursor.execute("SELECT id FROM users WHERE email = ? AND role = 'patient'", (email,))
+                existing_user = cursor.fetchone()
+                
+                if not existing_user:
+                    # Create default password for patient account
+                    default_password = hash_password('Patient@123')
+                    profile_data = json.dumps({
+                        'phone': phone,
+                        'role_specific': {
+                            'dob': '',
+                            'gender': 'Not specified',
+                            'address': '',
+                            'blood_type': '',
+                            'medical_conditions': disease
+                        }
+                    })
+                    cursor.execute('''INSERT INTO users (role, email, password, name, phone, profile_data) 
+                                      VALUES (?, ?, ?, ?, ?, ?)''',
+                                  ('patient', email, default_password, name, phone, profile_data))
+                    logger.info(f"Patient user account created: {email}")
+            except sqlite3.IntegrityError:
+                # User already exists, that's fine
+                logger.info(f"Patient user already exists: {email}")
+            
+            conn.commit()
+            conn.close()
+            
+            logger.info(f"Patient record created: {name} (ID: {record_id}, Email: {email})")
+            return jsonify({
+                "status": "success", 
+                "message": "Patient record saved and user account created",
+                "patient_id": record_id,
+                "patient_email": email
+            }), 201
+        except Exception as e:
+            conn.rollback()
+            conn.close()
+            raise e
     
     except Exception as e:
         logger.error(f"Error saving patient data: {e}")
@@ -660,8 +990,9 @@ def save_data():
 
 @app.route('/fetch_records', methods=['GET'])
 @require_login
+@require_role('receptionist', 'doctor', 'patient')
 def fetch_records():
-    """Fetch all patient records"""
+    """Fetch all patient records (returns consistent format with 'records' key)"""
     try:
         conn = sqlite3.connect('healthcare.db')
         cursor = conn.cursor()
@@ -669,7 +1000,8 @@ def fetch_records():
         data = cursor.fetchall()
         conn.close()
         logger.info(f"Patient records fetched - {len(data)} records")
-        return jsonify(data), 200
+        # Return with consistent format
+        return jsonify({"records": data, "success": True}), 200
     except Exception as e:
         logger.error(f"Error fetching records: {e}")
         return jsonify({"error": "Failed to fetch records"}), 500
@@ -690,6 +1022,127 @@ def delete_record(rec_id):
     except Exception as e:
         logger.error(f"Error deleting record: {e}")
         return jsonify({"error": "Failed to delete record"}), 500
+
+# --- DATA SYNC ENDPOINTS (Sync all users and records) ---
+
+@app.route('/get_all_patients_and_records', methods=['GET'])
+@require_login
+@require_role('receptionist', 'doctor')
+def get_all_patients_and_records():
+    """Get all patient data from both users table and records table (COMPREHENSIVE SYNC)"""
+    try:
+        conn = sqlite3.connect('healthcare.db')
+        cursor = conn.cursor()
+        
+        # Get patient records from records table
+        cursor.execute("SELECT * FROM records ORDER BY id ASC")
+        records_data = cursor.fetchall()
+        
+        # Get patient users from users table  
+        cursor.execute('''SELECT id, name, email, phone, created_at FROM users WHERE role = 'patient' ORDER BY id ASC''')
+        users_data = cursor.fetchall()
+        
+        conn.close()
+        
+        logger.info(f"Patient data synced - {len(records_data)} records, {len(users_data)} user accounts")
+        return jsonify({
+            "success": True,
+            "records": records_data,
+            "users": users_data,
+            "total_records": len(records_data),
+            "total_users": len(users_data)
+        }), 200
+    except Exception as e:
+        logger.error(f"Error fetching patient data: {e}")
+        return jsonify({"error": "Failed to fetch patient data"}), 500
+
+
+@app.route('/get_all_doctors', methods=['GET'])
+@require_login
+def get_all_doctors():
+    """Get all registered doctors (COMPREHENSIVE SYNC)"""
+    try:
+        conn = sqlite3.connect('healthcare.db')
+        cursor = conn.cursor()
+        
+        cursor.execute('''SELECT id, name, email, phone, created_at, profile_data FROM users WHERE role = 'doctor' ORDER BY id ASC''')
+        doctors = cursor.fetchall()
+        
+        conn.close()
+        
+        logger.info(f"Doctors synced - {len(doctors)} doctors")
+        return jsonify({
+            "success": True,
+            "doctors": [
+                {
+                    "id": d[0],
+                    "name": d[1],
+                    "email": d[2],
+                    "phone": d[3],
+                    "joined": d[4],
+                    "profile": d[5]
+                }
+                for d in doctors
+            ],
+            "total": len(doctors)
+        }), 200
+    except Exception as e:
+        logger.error(f"Error fetching doctors: {e}")
+        return jsonify({"error": "Failed to fetch doctors"}), 500
+
+
+@app.route('/refresh_dashboard_data', methods=['GET'])
+@require_login
+def refresh_dashboard_data():
+    """Refresh all dashboard data (for real-time sync)"""
+    try:
+        user_role = session.get('role')
+        conn = sqlite3.connect('healthcare.db')
+        cursor = conn.cursor()
+        
+        result = {"success": True, "role": user_role}
+        
+        # Get data based on user role
+        if user_role == 'receptionist':
+            # Get patients
+            cursor.execute("SELECT * FROM records ORDER BY id ASC")
+            result["patients"] = cursor.fetchall()
+            
+            # Get doctors
+            cursor.execute('''SELECT id, name, email, phone FROM users WHERE role = 'doctor' ''')
+            result["doctors"] = cursor.fetchall()
+            
+            # Get appointments
+            cursor.execute("SELECT * FROM appointments ORDER BY appointment_date ASC")
+            result["appointments"] = cursor.fetchall()
+            
+        elif user_role == 'doctor':
+            # Get patient records
+            cursor.execute("SELECT * FROM records ORDER BY id ASC")
+            result["patients"] = cursor.fetchall()
+            
+            # Get doctor's appointments
+            cursor.execute("SELECT * FROM appointments WHERE doctor_name = ? ORDER BY appointment_date ASC", 
+                          (session.get('name'),))
+            result["appointments"] = cursor.fetchall()
+            
+        elif user_role == 'patient':
+            # Get patient's own records
+            cursor.execute("SELECT * FROM records WHERE name = ? ORDER BY id ASC", 
+                          (session.get('name'),))
+            result["my_records"] = cursor.fetchall()
+            
+            # Get available doctors
+            cursor.execute('''SELECT id, name, email, phone FROM users WHERE role = 'doctor' ''')
+            result["doctors"] = cursor.fetchall()
+        
+        conn.close()
+        
+        logger.info(f"Dashboard data refreshed for {user_role}")
+        return jsonify(result), 200
+    except Exception as e:
+        logger.error(f"Error refreshing dashboard: {e}")
+        return jsonify({"error": "Failed to refresh dashboard"}), 500
 
 # --- PHASE 2: APPOINTMENT SCHEDULING SYSTEM ---
 
@@ -944,6 +1397,7 @@ def issue_prescription():
 
 @app.route('/get_prescriptions', methods=['GET'])
 @require_login
+@require_role('patient', 'doctor')
 def get_prescriptions():
     """Get prescriptions for current user"""
     try:
@@ -1235,6 +1689,7 @@ def mark_notification_read(notification_id):
 
 @app.route('/get_statistics', methods=['GET'])
 @require_login
+@require_role('doctor', 'receptionist')
 def get_statistics():
     """Get system statistics for dashboard"""
     try:
@@ -1288,6 +1743,8 @@ def get_statistics():
 
 
 @app.route('/diagnose', methods=['POST'])
+@require_login
+@require_role('patient')
 def diagnose():
     """
     AI-powered disease diagnosis based on symptoms (Patient feature only)
@@ -1788,6 +2245,129 @@ def update_doctor_availability():
     except Exception as e:
         logger.error(f"Error updating doctor availability: {e}")
         return jsonify({"error": f"Failed to update availability: {str(e)}"}), 500
+
+# --- DOCTOR PATIENT MANAGEMENT SYSTEM ---
+
+@app.route('/get_patient_details/<int:patient_id>', methods=['GET'])
+@require_login
+@require_role('doctor', 'receptionist')
+def get_patient_details(patient_id):
+    """Get detailed patient information"""
+    try:
+        conn = sqlite3.connect('healthcare.db')
+        cursor = conn.cursor()
+        
+        # Get patient info
+        cursor.execute('''SELECT id, name, email, phone, profile_data FROM users 
+                         WHERE id = ? AND role = 'patient' ''', (patient_id,))
+        patient = cursor.fetchone()
+        
+        if not patient:
+            conn.close()
+            return jsonify({"error": "Patient not found"}), 404
+        
+        # Get patient medical history
+        cursor.execute('''SELECT condition, diagnosis_date, treatment, notes FROM medical_history 
+                         WHERE patient_id = ? ORDER BY diagnosis_date DESC ''', (patient_id,))
+        medical_history = cursor.fetchall()
+        
+        # Get patient prescriptions
+        cursor.execute('''SELECT medication, dosage, frequency, duration, status, issued_date 
+                         FROM prescriptions WHERE patient_id = ? ORDER BY issued_date DESC ''', (patient_id,))
+        prescriptions = cursor.fetchall()
+        
+        # Get patient appointments
+        cursor.execute('''SELECT appointment_date, appointment_time, reason, status 
+                         FROM appointments WHERE patient_id = ? ORDER BY appointment_date DESC ''', (patient_id,))
+        appointments = cursor.fetchall()
+        
+        conn.close()
+        
+        profile_data = json.loads(patient[4]) if patient[4] else {}
+        
+        return jsonify({
+            "status": "success",
+            "patient": {
+                "id": patient[0],
+                "name": patient[1],
+                "email": patient[2],
+                "phone": patient[3],
+                "profile_data": profile_data,
+                "medical_history": [{
+                    "condition": m[0],
+                    "diagnosis_date": m[1],
+                    "treatment": m[2],
+                    "notes": m[3]
+                } for m in medical_history],
+                "prescriptions": [{
+                    "medication": p[0],
+                    "dosage": p[1],
+                    "frequency": p[2],
+                    "duration": p[3],
+                    "status": p[4],
+                    "issued_date": p[5]
+                } for p in prescriptions],
+                "appointments": [{
+                    "date": a[0],
+                    "time": a[1],
+                    "reason": a[2],
+                    "status": a[3]
+                } for a in appointments]
+            }
+        }), 200
+    
+    except Exception as e:
+        logger.error(f"Error fetching patient details: {e}")
+        return jsonify({"error": "Failed to fetch patient details"}), 500
+
+@app.route('/update_patient_medical_history', methods=['POST'])
+@require_login
+@require_role('doctor', 'receptionist')
+def update_patient_medical_history():
+    """Add or update patient medical history"""
+    try:
+        data = request.json
+        patient_id = data.get('patient_id')
+        condition = sanitize_input(data.get('condition', ''))
+        treatment = sanitize_input(data.get('treatment', ''))
+        notes = sanitize_input(data.get('notes', ''))
+        
+        if not all([patient_id, condition]):
+            return jsonify({"error": "Missing required fields"}), 400
+        
+        doctor_id = session.get('user_id')
+        diagnosis_date = datetime.now().isoformat().split('T')[0]
+        
+        conn = sqlite3.connect('healthcare.db')
+        cursor = conn.cursor()
+        
+        # Verify patient exists
+        cursor.execute('SELECT id FROM users WHERE id = ? AND role = ?', (patient_id, 'patient'))
+        if not cursor.fetchone():
+            conn.close()
+            return jsonify({"error": "Patient not found"}), 404
+        
+        # Add medical history
+        cursor.execute('''INSERT INTO medical_history 
+                         (patient_id, condition, diagnosis_date, treatment, doctor_id, notes)
+                         VALUES (?, ?, ?, ?, ?, ?)''',
+                      (patient_id, condition, diagnosis_date, treatment, doctor_id, notes))
+        
+        history_id = cursor.lastrowid
+        conn.commit()
+        conn.close()
+        
+        logger.info(f"Medical history added: ID {history_id}, Patient {patient_id}")
+        
+        return jsonify({
+            "status": "success",
+            "message": "Medical history updated",
+            "history_id": history_id
+        }), 201
+    
+    except Exception as e:
+        logger.error(f"Error updating medical history: {e}")
+        return jsonify({"error": f"Failed to update medical history: {str(e)}"}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

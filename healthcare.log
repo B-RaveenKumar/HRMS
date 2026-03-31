@@ -365,3 +365,1120 @@
 2026-03-25 20:21:47,617 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:21:47] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
 2026-03-25 20:22:05,733 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
 2026-03-25 20:22:06,101 - werkzeug - INFO -  * Restarting with stat
+2026-03-25 20:22:09,292 - __main__ - ERROR - FLASK_SECRET_KEY not found in .env file!
+2026-03-25 20:22:09,293 - __main__ - INFO -    Generate a secure key: python -c "import os; print(os.urandom(32).hex())"
+2026-03-25 20:22:09,295 - __main__ - INFO - Database initialized successfully
+2026-03-25 20:22:09,389 - werkzeug - WARNING -  * Debugger is active!
+2026-03-25 20:22:09,398 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-25 20:24:11,437 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:24:11] "GET /register HTTP/1.1" 200 -
+2026-03-25 20:24:11,610 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:24:11] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-25 20:24:43,299 - __main__ - INFO - New user registered: resp@gmail.com with role receptionist
+2026-03-25 20:24:43,300 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:24:43] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+2026-03-25 20:24:45,414 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:24:45] "GET /login HTTP/1.1" 200 -
+2026-03-25 20:24:45,525 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:24:45] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-25 20:24:58,834 - __main__ - INFO - User logged in: resp@gmail.com (receptionist)
+2026-03-25 20:24:58,839 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:24:58] "POST /login HTTP/1.1" 200 -
+2026-03-25 20:24:58,896 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:24:58] "GET /dashboard HTTP/1.1" 200 -
+2026-03-25 20:24:58,965 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:24:58] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-25 20:24:59,720 - __main__ - WARNING - Unauthorized access attempt to get_statistics
+2026-03-25 20:24:59,722 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:24:59] "[31m[1mGET /get_statistics HTTP/1.1[0m" 401 -
+2026-03-25 20:25:05,408 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:25:05] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-03-25 20:25:05,420 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:25:05] "GET / HTTP/1.1" 200 -
+2026-03-25 20:25:05,470 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:25:05] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-25 20:25:20,114 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:25:20] "GET /register HTTP/1.1" 200 -
+2026-03-25 20:25:20,171 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:25:20] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-25 20:26:01,814 - __main__ - INFO - New user registered: pat@gmail.com with role patient
+2026-03-25 20:26:01,816 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:26:01] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+2026-03-25 20:26:03,931 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:26:03] "GET /login HTTP/1.1" 200 -
+2026-03-25 20:26:04,050 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:26:04] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-25 20:26:15,459 - __main__ - INFO - User logged in: pat@gmail.com (patient)
+2026-03-25 20:26:15,460 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:26:15] "POST /login HTTP/1.1" 200 -
+2026-03-25 20:26:15,489 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:26:15] "GET /dashboard HTTP/1.1" 200 -
+2026-03-25 20:26:15,546 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:26:15] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-25 20:26:16,365 - __main__ - WARNING - Unauthorized access attempt to get_statistics
+2026-03-25 20:26:16,367 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:26:16] "[31m[1mGET /get_statistics HTTP/1.1[0m" 401 -
+2026-03-25 20:30:35,826 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-25 20:30:36,148 - werkzeug - INFO -  * Restarting with stat
+2026-03-25 20:30:39,032 - __main__ - ERROR - FLASK_SECRET_KEY not found in .env file!
+2026-03-25 20:30:39,032 - __main__ - INFO -    Generate a secure key: python -c "import os; print(os.urandom(32).hex())"
+2026-03-25 20:30:39,036 - __main__ - INFO - Database initialized successfully
+2026-03-25 20:30:39,111 - werkzeug - WARNING -  * Debugger is active!
+2026-03-25 20:30:39,120 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-25 20:32:26,529 - __main__ - ERROR - FLASK_SECRET_KEY not found in .env file!
+2026-03-25 20:32:26,531 - __main__ - INFO -    Generate a secure key: python -c "import os; print(os.urandom(32).hex())"
+2026-03-25 20:32:26,536 - __main__ - INFO - Database initialized successfully
+2026-03-25 20:32:26,714 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-25 20:32:26,715 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-25 20:32:26,718 - werkzeug - INFO -  * Restarting with stat
+2026-03-25 20:32:28,490 - __main__ - ERROR - FLASK_SECRET_KEY not found in .env file!
+2026-03-25 20:32:28,491 - __main__ - INFO -    Generate a secure key: python -c "import os; print(os.urandom(32).hex())"
+2026-03-25 20:32:28,493 - __main__ - INFO - Database initialized successfully
+2026-03-25 20:32:28,534 - werkzeug - WARNING -  * Debugger is active!
+2026-03-25 20:32:28,539 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-25 20:33:39,786 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:33:39] "GET /dashboard HTTP/1.1" 200 -
+2026-03-25 20:33:40,041 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:33:40] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-25 20:33:40,687 - __main__ - WARNING - Unauthorized access attempt to get_statistics
+2026-03-25 20:33:40,689 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:33:40] "[31m[1mGET /get_statistics HTTP/1.1[0m" 401 -
+2026-03-25 20:33:45,008 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:33:45] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-03-25 20:33:45,026 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:33:45] "GET / HTTP/1.1" 200 -
+2026-03-25 20:33:45,086 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:33:45] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-25 20:33:54,193 - __main__ - INFO - User logged in: pat@gmail.com (patient)
+2026-03-25 20:33:54,195 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:33:54] "POST /login HTTP/1.1" 200 -
+2026-03-25 20:33:54,236 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:33:54] "GET /dashboard HTTP/1.1" 200 -
+2026-03-25 20:33:54,303 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:33:54] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-25 20:33:54,391 - __main__ - WARNING - Unauthorized access attempt to get_statistics
+2026-03-25 20:33:54,392 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:33:54] "[31m[1mGET /get_statistics HTTP/1.1[0m" 401 -
+2026-03-25 20:33:57,881 - __main__ - WARNING - Unauthorized access attempt to get_notifications
+2026-03-25 20:33:57,883 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:33:57] "[31m[1mGET /get_notifications HTTP/1.1[0m" 401 -
+2026-03-25 20:33:59,468 - __main__ - WARNING - Unauthorized access attempt to fetch_records
+2026-03-25 20:33:59,469 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:33:59] "[31m[1mGET /fetch_records HTTP/1.1[0m" 401 -
+2026-03-25 20:34:01,120 - __main__ - WARNING - Unauthorized access attempt to get_billing_history
+2026-03-25 20:34:01,122 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:34:01] "[31m[1mGET /get_billing_history HTTP/1.1[0m" 401 -
+2026-03-25 20:34:01,838 - __main__ - WARNING - Unauthorized access attempt to get_prescriptions
+2026-03-25 20:34:01,839 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:34:01] "[31m[1mGET /get_prescriptions HTTP/1.1[0m" 401 -
+2026-03-25 20:34:03,389 - __main__ - WARNING - Unauthorized access attempt to get_appointments
+2026-03-25 20:34:03,391 - werkzeug - INFO - 127.0.0.1 - - [25/Mar/2026 20:34:03] "[31m[1mGET /get_appointments HTTP/1.1[0m" 401 -
+2026-03-25 20:34:08,768 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-25 20:34:09,027 - werkzeug - INFO -  * Restarting with stat
+2026-03-25 20:34:09,746 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-25 20:34:10,069 - werkzeug - INFO -  * Restarting with stat
+2026-03-25 20:34:11,577 - __main__ - ERROR - FLASK_SECRET_KEY not found in .env file!
+2026-03-25 20:34:11,577 - __main__ - INFO -    Generate a secure key: python -c "import os; print(os.urandom(32).hex())"
+2026-03-25 20:34:11,579 - __main__ - INFO - Database initialized successfully
+2026-03-25 20:34:11,621 - werkzeug - WARNING -  * Debugger is active!
+2026-03-25 20:34:11,627 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-25 20:34:12,077 - __main__ - ERROR - FLASK_SECRET_KEY not found in .env file!
+2026-03-25 20:34:12,078 - __main__ - INFO -    Generate a secure key: python -c "import os; print(os.urandom(32).hex())"
+2026-03-25 20:34:12,080 - __main__ - INFO - Database initialized successfully
+2026-03-25 20:34:12,127 - werkzeug - WARNING -  * Debugger is active!
+2026-03-25 20:34:12,133 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 13:39:25,930 - __main__ - ERROR - FLASK_SECRET_KEY not found in .env file!
+2026-03-31 13:39:25,931 - __main__ - INFO -    Generate a secure key: python -c "import os; print(os.urandom(32).hex())"
+2026-03-31 13:39:25,960 - __main__ - INFO - Database initialized successfully
+2026-03-31 13:39:26,150 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-31 13:39:26,150 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-31 13:39:26,156 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 13:39:28,912 - __main__ - ERROR - FLASK_SECRET_KEY not found in .env file!
+2026-03-31 13:39:28,913 - __main__ - INFO -    Generate a secure key: python -c "import os; print(os.urandom(32).hex())"
+2026-03-31 13:39:28,920 - __main__ - INFO - Database initialized successfully
+2026-03-31 13:39:29,058 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 13:39:29,077 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 13:41:00,682 - __main__ - INFO - Database initialized successfully
+2026-03-31 13:41:00,767 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-31 13:41:00,768 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-31 13:41:00,771 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 13:41:03,408 - __main__ - INFO - Database initialized successfully
+2026-03-31 13:41:03,485 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 13:41:03,492 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 13:42:05,077 - __main__ - INFO - Database initialized successfully
+2026-03-31 13:42:05,148 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-31 13:42:05,148 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-31 13:42:05,151 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 13:42:07,571 - __main__ - INFO - Database initialized successfully
+2026-03-31 13:42:07,647 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 13:42:07,652 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 13:43:15,156 - __main__ - INFO - Database initialized successfully
+2026-03-31 13:43:15,248 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-31 13:43:15,249 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-31 13:43:15,252 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 13:43:17,729 - __main__ - INFO - Database initialized successfully
+2026-03-31 13:43:17,799 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 13:43:17,807 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 13:49:02,697 - __main__ - INFO - Database initialized successfully
+2026-03-31 13:49:02,809 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-31 13:49:02,810 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-31 13:49:02,814 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 13:49:05,303 - __main__ - INFO - Database initialized successfully
+2026-03-31 13:49:05,386 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 13:49:05,396 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 13:49:38,508 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 13:49:38,537 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 13:49:38,651 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 13:49:38,852 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 13:49:38,906 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 13:49:38,973 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 13:49:41,834 - __main__ - INFO - Database initialized successfully
+2026-03-31 13:49:41,842 - __main__ - INFO - Database initialized successfully
+2026-03-31 13:49:41,852 - __main__ - INFO - Database initialized successfully
+2026-03-31 13:49:41,899 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 13:49:41,904 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 13:49:41,907 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 13:49:41,912 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 13:49:41,917 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 13:49:41,925 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 13:53:09,754 - __main__ - INFO - Database initialized successfully
+2026-03-31 13:53:09,879 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-31 13:53:09,880 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-31 13:53:09,886 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 13:53:13,620 - __main__ - INFO - Database initialized successfully
+2026-03-31 13:53:13,775 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 13:53:13,792 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:04:31,693 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:04:31,779 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-31 14:04:31,779 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-31 14:04:31,782 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:04:34,156 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:04:34,213 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:04:34,218 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:12:49,021 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:12:49,027 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:12:49,081 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:12:49,481 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:12:49,485 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:12:49,575 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:12:52,712 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:12:52,749 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:12:52,756 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:12:52,826 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:12:52,836 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:12:52,846 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:12:52,853 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:12:52,856 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:12:52,861 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:12:56,686 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:12:56,768 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-31 14:12:56,769 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-31 14:12:56,774 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:13:00,597 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:13:00] "GET / HTTP/1.1" 200 -
+2026-03-31 14:13:00,971 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:13:01,021 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:13:01] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-31 14:13:01,050 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:13:01,067 - werkzeug - INFO -  * Debugger PIN: 545-567-434
+2026-03-31 14:13:01,270 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:13:01] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-03-31 14:13:18,709 - __main__ - ERROR - Password verification error: name 'bcrypt' is not defined
+2026-03-31 14:13:18,710 - __main__ - WARNING - Failed login attempt: resp@gmail.com (receptionist)
+2026-03-31 14:13:18,711 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:13:18] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2026-03-31 14:13:21,049 - __main__ - ERROR - Password verification error: name 'bcrypt' is not defined
+2026-03-31 14:13:21,049 - __main__ - WARNING - Failed login attempt: resp@gmail.com (receptionist)
+2026-03-31 14:13:21,050 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:13:21] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2026-03-31 14:13:21,895 - __main__ - ERROR - Password verification error: name 'bcrypt' is not defined
+2026-03-31 14:13:21,895 - __main__ - ERROR - Password verification error: name 'bcrypt' is not defined
+2026-03-31 14:13:21,896 - __main__ - WARNING - Failed login attempt: resp@gmail.com (receptionist)
+2026-03-31 14:13:21,896 - __main__ - WARNING - Failed login attempt: resp@gmail.com (receptionist)
+2026-03-31 14:13:21,897 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:13:21] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2026-03-31 14:13:21,897 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:13:21] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2026-03-31 14:13:22,326 - __main__ - ERROR - Password verification error: name 'bcrypt' is not defined
+2026-03-31 14:13:22,326 - __main__ - WARNING - Failed login attempt: resp@gmail.com (receptionist)
+2026-03-31 14:13:22,327 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:13:22] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2026-03-31 14:13:22,327 - __main__ - ERROR - Password verification error: name 'bcrypt' is not defined
+2026-03-31 14:13:22,328 - __main__ - WARNING - Failed login attempt: resp@gmail.com (receptionist)
+2026-03-31 14:13:22,328 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:13:22] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2026-03-31 14:13:30,192 - __main__ - WARNING - Failed login attempt: resp@gmail.com (patient)
+2026-03-31 14:13:30,192 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:13:30] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2026-03-31 14:13:31,601 - __main__ - WARNING - Failed login attempt: resp@gmail.com (patient)
+2026-03-31 14:13:31,601 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:13:31] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2026-03-31 14:13:31,601 - __main__ - WARNING - Failed login attempt: resp@gmail.com (patient)
+2026-03-31 14:13:31,602 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:13:31] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2026-03-31 14:13:32,045 - __main__ - WARNING - Failed login attempt: resp@gmail.com (patient)
+2026-03-31 14:13:32,046 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:13:32] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2026-03-31 14:13:32,046 - __main__ - WARNING - Failed login attempt: resp@gmail.com (patient)
+2026-03-31 14:13:32,047 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:13:32] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2026-03-31 14:13:32,467 - __main__ - WARNING - Failed login attempt: resp@gmail.com (patient)
+2026-03-31 14:13:32,468 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:13:32] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2026-03-31 14:13:32,468 - __main__ - WARNING - Failed login attempt: resp@gmail.com (patient)
+2026-03-31 14:13:32,469 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:13:32] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2026-03-31 14:13:32,837 - __main__ - WARNING - Failed login attempt: resp@gmail.com (patient)
+2026-03-31 14:13:32,838 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:13:32] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2026-03-31 14:13:37,808 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:13:37] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-31 14:13:37,811 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:13:37] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-03-31 14:14:18,815 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:14:18,836 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:14:18,884 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:14:19,310 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:14:19,313 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:14:19,417 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:14:21,818 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:14:22,238 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:14:23,329 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:14:23,368 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:14:23,433 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:14:23,443 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:14:23,460 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:14:23,465 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:14:23,470 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:14:23,557 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:14:23,567 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:15:28,950 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:15:28,976 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:15:28,994 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:15:29,281 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:15:29,315 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:15:29,384 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:15:32,763 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:15:32,795 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:15:32,853 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:15:33,907 - __main__ - INFO - Test users created successfully
+2026-03-31 14:15:33,914 - __main__ - WARNING - Test users already exist or error: UNIQUE constraint failed: users.email
+2026-03-31 14:15:33,982 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:15:33,991 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:15:33,999 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:15:34,008 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:16:09,105 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:16:09,208 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-31 14:16:09,208 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-31 14:16:09,213 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:16:11,523 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:16:11,576 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:16:11,582 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:19:16,866 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:19:16,928 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-31 14:19:16,928 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-31 14:19:16,931 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:19:19,287 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:19:19,359 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:19:19,366 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:19:30,765 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:19:30] "GET / HTTP/1.1" 200 -
+2026-03-31 14:19:30,947 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:19:30] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-31 14:19:43,744 - __main__ - INFO - User logged in: resp@gmail.com (receptionist)
+2026-03-31 14:19:43,748 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:19:43] "POST /login HTTP/1.1" 200 -
+2026-03-31 14:19:44,018 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:19:44] "GET /receptionist_dashboard HTTP/1.1" 200 -
+2026-03-31 14:19:44,193 - __main__ - INFO - Patient records fetched - 0 records
+2026-03-31 14:19:44,197 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:19:44] "GET /fetch_records HTTP/1.1" 200 -
+2026-03-31 14:19:44,200 - __main__ - WARNING - Forbidden access attempt - role receptionist to get_prescriptions
+2026-03-31 14:19:44,207 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:19:44] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 14:19:44,208 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:19:44] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 14:19:44,210 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:19:44] "GET /get_billing_history HTTP/1.1" 200 -
+2026-03-31 14:19:44,212 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:19:44] "[31m[1mGET /get_prescriptions HTTP/1.1[0m" 403 -
+2026-03-31 14:20:05,200 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:20:05] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-03-31 14:20:05,214 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:20:05] "GET / HTTP/1.1" 200 -
+2026-03-31 14:20:05,263 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:20:05] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-31 14:20:14,192 - __main__ - INFO - User logged in: pat@gmail.com (patient)
+2026-03-31 14:20:14,194 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:20:14] "POST /login HTTP/1.1" 200 -
+2026-03-31 14:20:14,256 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:20:14] "GET /patient_dashboard HTTP/1.1" 200 -
+2026-03-31 14:20:14,325 - __main__ - WARNING - Forbidden access attempt - role patient to fetch_records
+2026-03-31 14:20:14,327 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:20:14] "[31m[1mGET /fetch_records HTTP/1.1[0m" 403 -
+2026-03-31 14:20:14,328 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:20:14] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 14:20:14,330 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:20:14] "GET /get_prescriptions HTTP/1.1" 200 -
+2026-03-31 14:20:45,237 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:20:45] "POST /ai_engine HTTP/1.1" 200 -
+2026-03-31 14:21:24,270 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:21:24] "POST /ai_engine HTTP/1.1" 200 -
+2026-03-31 14:21:47,696 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:21:47] "POST /ai_engine HTTP/1.1" 200 -
+2026-03-31 14:22:03,726 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:22:03] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-03-31 14:22:03,739 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:22:03] "GET / HTTP/1.1" 200 -
+2026-03-31 14:22:03,795 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:22:03] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-31 14:22:33,416 - __main__ - WARNING - Failed login attempt: omighamukuteshwaren@gmail.com (doctor)
+2026-03-31 14:22:33,417 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:22:33] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2026-03-31 14:22:36,016 - __main__ - WARNING - Failed login attempt: omighamukuteshwaren@gmail.com (doctor)
+2026-03-31 14:22:36,016 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:22:36] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2026-03-31 14:22:40,742 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:22:40] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-31 14:22:40,780 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:22:40] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-03-31 14:22:46,390 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:22:46] "GET /register HTTP/1.1" 200 -
+2026-03-31 14:22:46,530 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:22:46] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-03-31 14:22:46,534 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:22:46] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-31 14:23:24,732 - __main__ - INFO - New user registered: doct@gmail.com with role doctor
+2026-03-31 14:23:24,733 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:23:24] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+2026-03-31 14:23:26,824 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:23:26] "GET /login HTTP/1.1" 200 -
+2026-03-31 14:23:26,947 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:23:26] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-31 14:23:48,255 - __main__ - INFO - User logged in: doct@gmail.com (doctor)
+2026-03-31 14:23:48,256 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:23:48] "POST /login HTTP/1.1" 200 -
+2026-03-31 14:23:48,313 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:23:48] "GET /doctor_dashboard HTTP/1.1" 200 -
+2026-03-31 14:23:48,449 - __main__ - INFO - Patient records fetched - 0 records
+2026-03-31 14:23:48,451 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:23:48] "GET /fetch_records HTTP/1.1" 200 -
+2026-03-31 14:23:48,452 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:23:48] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 14:23:48,465 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:23:48] "GET /get_prescriptions HTTP/1.1" 200 -
+2026-03-31 14:24:56,761 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:24:56] "[31m[1mPOST /save_data HTTP/1.1[0m" 400 -
+2026-03-31 14:25:05,127 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:25:05] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-03-31 14:25:08,671 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:25:08] "[31m[1mPOST /save_data HTTP/1.1[0m" 400 -
+2026-03-31 14:25:21,190 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:25:21,269 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:25:21,282 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:25:21,539 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:25:21,603 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:25:21,612 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:25:24,399 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:25:24,400 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:25:24,403 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:25:24,459 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:25:24,459 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:25:24,462 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:25:24,466 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:25:24,466 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:25:24,470 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:26:08,081 - __main__ - WARNING - Unauthorized access attempt to get_statistics
+2026-03-31 14:26:08,084 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:26:08] "[31m[1mGET /get_statistics HTTP/1.1[0m" 401 -
+2026-03-31 14:26:15,348 - __main__ - WARNING - Unauthorized access attempt to get_appointments
+2026-03-31 14:26:15,349 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:26:15] "[31m[1mGET /get_appointments HTTP/1.1[0m" 401 -
+2026-03-31 14:26:19,006 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:26:19,046 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:26:19,146 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:26:19,659 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:26:19,806 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:26:19,848 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:26:23,679 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:26:23,690 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:26:23,742 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:26:23,746 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:26:23,749 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:26:23,759 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:26:23,769 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:26:23,821 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:26:23,828 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:26:23,854 - __main__ - WARNING - Unauthorized access attempt to get_statistics
+2026-03-31 14:26:23,856 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:26:23] "[31m[1mGET /get_statistics HTTP/1.1[0m" 401 -
+2026-03-31 14:26:23,857 - __main__ - WARNING - Unauthorized access attempt to get_appointments
+2026-03-31 14:26:23,858 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:26:23] "[31m[1mGET /get_appointments HTTP/1.1[0m" 401 -
+2026-03-31 14:26:24,176 - __main__ - WARNING - Unauthorized access attempt to get_statistics
+2026-03-31 14:26:24,177 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:26:24] "[31m[1mGET /get_statistics HTTP/1.1[0m" 401 -
+2026-03-31 14:26:24,487 - __main__ - WARNING - Unauthorized access attempt to get_statistics
+2026-03-31 14:26:24,488 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:26:24] "[31m[1mGET /get_statistics HTTP/1.1[0m" 401 -
+2026-03-31 14:27:55,624 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:27:55] "GET /doctor_dashboard HTTP/1.1" 200 -
+2026-03-31 14:27:55,697 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:27:55] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-03-31 14:27:55,940 - __main__ - INFO - Patient records fetched - 0 records
+2026-03-31 14:27:55,943 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:27:55] "GET /fetch_records HTTP/1.1" 200 -
+2026-03-31 14:27:55,967 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:27:55] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 14:27:55,969 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:27:55] "GET /get_prescriptions HTTP/1.1" 200 -
+2026-03-31 14:28:48,967 - __main__ - INFO - Patient record created: Raveen (ID: 1)
+2026-03-31 14:28:48,968 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:28:48] "[35m[1mPOST /save_data HTTP/1.1[0m" 201 -
+2026-03-31 14:28:50,948 - __main__ - INFO - Patient records fetched - 1 records
+2026-03-31 14:28:50,949 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:28:50] "GET /fetch_records HTTP/1.1" 200 -
+2026-03-31 14:33:23,985 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:33:23] "GET / HTTP/1.1" 200 -
+2026-03-31 14:33:24,233 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:33:24] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-31 14:33:33,789 - __main__ - INFO - User logged in: pat@gmail.com (patient)
+2026-03-31 14:33:33,791 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:33:33] "POST /login HTTP/1.1" 200 -
+2026-03-31 14:33:33,956 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:33:33] "GET /patient_dashboard HTTP/1.1" 200 -
+2026-03-31 14:33:34,103 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:33:34] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 14:33:34,106 - __main__ - WARNING - Forbidden access attempt - role patient to fetch_records
+2026-03-31 14:33:34,108 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:33:34] "GET /get_prescriptions HTTP/1.1" 200 -
+2026-03-31 14:33:34,110 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:33:34] "[31m[1mGET /fetch_records HTTP/1.1[0m" 403 -
+2026-03-31 14:33:45,117 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:33:45] "POST /ai_engine HTTP/1.1" 200 -
+2026-03-31 14:34:08,834 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:34:08] "GET /patient_dashboard HTTP/1.1" 200 -
+2026-03-31 14:34:08,974 - __main__ - WARNING - Forbidden access attempt - role patient to fetch_records
+2026-03-31 14:34:08,976 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:34:08] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 14:34:08,978 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:34:08] "[31m[1mGET /fetch_records HTTP/1.1[0m" 403 -
+2026-03-31 14:34:08,980 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:34:08] "GET /get_prescriptions HTTP/1.1" 200 -
+2026-03-31 14:34:12,278 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:34:12] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-03-31 14:34:12,289 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:34:12] "GET / HTTP/1.1" 200 -
+2026-03-31 14:34:12,362 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:34:12] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-31 14:34:26,859 - __main__ - INFO - User logged in: receptionist@hospital.com (receptionist)
+2026-03-31 14:34:26,860 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:34:26] "POST /login HTTP/1.1" 200 -
+2026-03-31 14:34:26,914 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:34:26] "GET /receptionist_dashboard HTTP/1.1" 200 -
+2026-03-31 14:34:27,049 - __main__ - INFO - Patient records fetched - 1 records
+2026-03-31 14:34:27,050 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:34:27] "GET /fetch_records HTTP/1.1" 200 -
+2026-03-31 14:34:35,915 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:34:35] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 14:34:50,258 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:34:50] "GET /get_billing_history HTTP/1.1" 200 -
+2026-03-31 14:34:53,302 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:34:53] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 14:34:58,874 - __main__ - INFO - Patient records fetched - 1 records
+2026-03-31 14:34:58,875 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:34:58] "GET /fetch_records HTTP/1.1" 200 -
+2026-03-31 14:35:00,582 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:35:00] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 14:35:01,760 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:35:01] "GET /get_billing_history HTTP/1.1" 200 -
+2026-03-31 14:35:02,964 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:35:02] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 14:35:05,456 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:35:05] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 14:36:50,263 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:36:50,272 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:36:50,284 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:36:50,690 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:36:50,696 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:36:50,707 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:36:54,016 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:36:54,016 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:36:54,016 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:36:54,073 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:36:54,074 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:36:54,080 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:36:54,080 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:36:54,081 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:36:54,088 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:37:18,869 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:37:18,888 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:37:18,918 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:37:19,361 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:37:19,383 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:37:19,384 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:37:22,004 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:37:22,005 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:37:22,053 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:37:22,064 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:37:22,066 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:37:22,071 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:37:22,074 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:37:22,122 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:37:22,129 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:38:17,393 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:38:17] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-03-31 14:38:17,435 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:38:17] "GET / HTTP/1.1" 200 -
+2026-03-31 14:38:17,961 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:38:17] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-31 14:38:26,423 - __main__ - INFO - User logged in: pat@gmail.com (patient)
+2026-03-31 14:38:26,424 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:38:26] "POST /login HTTP/1.1" 200 -
+2026-03-31 14:38:26,576 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:38:26] "GET /patient_dashboard HTTP/1.1" 200 -
+2026-03-31 14:38:26,668 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:38:26] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 14:38:26,670 - __main__ - WARNING - Forbidden access attempt - role patient to fetch_records
+2026-03-31 14:38:26,673 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:38:26] "GET /get_prescriptions HTTP/1.1" 200 -
+2026-03-31 14:38:26,682 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:38:26] "[31m[1mGET /fetch_records HTTP/1.1[0m" 403 -
+2026-03-31 14:38:36,194 - httpx - INFO - HTTP Request: POST https://openrouter.io/api/v1/chat/completions "HTTP/1.1 405 Method Not Allowed"
+2026-03-31 14:38:36,196 - __main__ - ERROR - OpenRouter API error: Error code: 405
+2026-03-31 14:38:36,198 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:38:36] "[35m[1mPOST /ai_engine HTTP/1.1[0m" 500 -
+2026-03-31 14:38:43,513 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:38:43] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-03-31 14:38:54,789 - httpx - INFO - HTTP Request: POST https://openrouter.io/api/v1/chat/completions "HTTP/1.1 405 Method Not Allowed"
+2026-03-31 14:38:54,791 - __main__ - ERROR - OpenRouter API error: Error code: 405
+2026-03-31 14:38:54,793 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:38:54] "[35m[1mPOST /ai_engine HTTP/1.1[0m" 500 -
+2026-03-31 14:40:31,325 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:40:31,411 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:40:31,620 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:40:31,715 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:40:31,928 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:40:32,381 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:40:34,659 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:40:34,692 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:40:34,733 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:40:34,742 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:40:34,767 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:40:34,773 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:40:35,090 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:40:35,155 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:40:35,162 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:40:53,680 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:40:53,702 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:40:53,748 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:40:54,075 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:40:54,107 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:40:54,150 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:40:56,774 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:40:56,777 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:40:56,796 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:40:56,837 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:40:56,837 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:40:56,843 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:40:56,844 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:40:56,858 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:40:56,864 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:41:16,605 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:41:16,607 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:41:16,631 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:41:16,968 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:41:16,987 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:41:16,996 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:41:21,141 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:41:21,141 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:41:21,141 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:41:21,216 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:41:21,217 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:41:21,218 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:41:21,226 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:41:21,227 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:41:21,228 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:41:31,891 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:41:31,893 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:41:31,931 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:41:32,338 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:41:32,346 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:41:32,405 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:41:35,397 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:41:35,427 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:41:35,428 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:41:35,465 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:41:35,471 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:41:35,490 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:41:35,495 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:41:35,499 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:41:35,502 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:41:56,686 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\test_openrouter.py', reloading
+2026-03-31 14:41:56,691 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\test_openrouter.py', reloading
+2026-03-31 14:41:56,708 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\test_openrouter.py', reloading
+2026-03-31 14:41:57,079 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:41:57,081 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:41:57,096 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:42:00,195 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:42:00,198 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:42:00,204 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:42:00,261 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:42:00,263 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:42:00,263 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:42:00,270 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:42:00,270 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:42:00,271 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:42:24,606 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\debug_openrouter.py', reloading
+2026-03-31 14:42:24,621 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\debug_openrouter.py', reloading
+2026-03-31 14:42:24,726 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\debug_openrouter.py', reloading
+2026-03-31 14:42:25,172 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:42:25,222 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:42:25,306 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:42:28,427 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:42:28,445 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:42:28,457 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:42:28,504 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:42:28,514 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:42:28,514 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:42:28,522 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:42:28,537 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:42:28,545 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:42:41,761 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:42:41,801 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:42:41,814 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:42:42,140 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:42:42,195 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:42:42,206 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:42:45,247 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:42:45,248 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:42:45,264 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:42:45,312 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:42:45,320 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:42:45,320 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:42:45,327 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:42:45,333 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:42:45,340 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:43:09,166 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:43:09,252 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:43:09,274 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:43:09,483 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:43:09,586 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:43:09,612 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:43:12,382 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:43:12,394 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:43:12,428 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:43:12,448 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:43:12,456 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:43:12,460 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:43:12,469 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:43:12,493 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:43:12,502 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:44:44,518 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:44:44,644 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-31 14:44:44,645 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-31 14:44:44,648 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:44:47,749 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:44:47,805 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:44:47,812 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:44:59,184 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:44:59,214 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:44:59,237 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:44:59,249 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:44:59,629 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:44:59,638 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:44:59,662 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:44:59,683 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:45:02,665 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:45:02,670 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:45:02,677 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:45:02,681 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:45:02,682 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:45:02,687 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:45:02,690 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:45:02,695 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:45:02,728 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:45:02,735 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:45:02,736 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:45:02,743 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:45:02,748 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:45:02,749 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:45:02,755 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:45:02,757 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:45:07,585 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:45:07,602 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:45:07,608 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:45:07,629 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:45:08,048 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:45:08,083 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:45:08,126 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:45:08,155 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:45:11,158 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:45:11,165 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:45:11,165 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:45:11,170 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:45:11,180 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:45:11,187 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:45:11,189 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:45:11,194 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:45:11,255 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:45:11,267 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:45:11,267 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:45:11,275 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:45:11,282 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:45:11,287 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:45:11,299 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:45:11,310 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:45:25,121 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:45:25,130 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:45:25,216 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-31 14:45:25,216 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-31 14:45:25,221 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:45:27,699 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:45:27,705 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:45:27,782 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:45:27,790 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:46:03,663 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\test_chatbot.py', reloading
+2026-03-31 14:46:03,664 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\test_chatbot.py', reloading
+2026-03-31 14:46:03,670 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\test_chatbot.py', reloading
+2026-03-31 14:46:03,693 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\test_chatbot.py', reloading
+2026-03-31 14:46:04,104 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:46:04,110 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:46:04,115 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:46:04,139 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:46:07,918 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:46:07,927 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:46:07,964 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:46:07,970 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:46:07,973 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:46:07,979 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:46:08,045 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:46:08,053 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:46:08,057 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:46:08,062 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:46:08,066 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:46:08,070 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:46:08,123 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:46:08,126 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:46:08,187 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:46:08,195 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:46:12,197 - __main__ - ERROR - Login error: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2026-03-31 14:46:12,200 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:46:12] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2026-03-31 14:46:14,259 - __main__ - WARNING - Unauthorized access attempt to ai_engine
+2026-03-31 14:46:14,260 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:46:14] "[31m[1mPOST /ai_engine HTTP/1.1[0m" 401 -
+2026-03-31 14:46:16,333 - __main__ - WARNING - Unauthorized access attempt to ai_engine
+2026-03-31 14:46:16,335 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:46:16] "[31m[1mPOST /ai_engine HTTP/1.1[0m" 401 -
+2026-03-31 14:46:18,396 - __main__ - WARNING - Unauthorized access attempt to ai_engine
+2026-03-31 14:46:18,398 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:46:18] "[31m[1mPOST /ai_engine HTTP/1.1[0m" 401 -
+2026-03-31 14:46:20,448 - __main__ - WARNING - Unauthorized access attempt to ai_engine
+2026-03-31 14:46:20,449 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:46:20] "[31m[1mPOST /ai_engine HTTP/1.1[0m" 401 -
+2026-03-31 14:46:35,018 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\check_db.py', reloading
+2026-03-31 14:46:35,042 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\check_db.py', reloading
+2026-03-31 14:46:35,077 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\check_db.py', reloading
+2026-03-31 14:46:35,165 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\check_db.py', reloading
+2026-03-31 14:46:35,452 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:46:35,501 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:46:35,545 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:46:35,600 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:46:38,859 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:46:38,865 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:46:38,885 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:46:38,893 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:46:38,899 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:46:38,906 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:46:38,947 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:46:38,956 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:46:38,975 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:46:38,984 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:46:38,985 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:46:38,993 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:46:39,018 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:46:39,038 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:46:39,159 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:46:39,170 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:46:43,577 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:46:43] "GET / HTTP/1.1" 200 -
+2026-03-31 14:46:53,013 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\check_db_schema.py', reloading
+2026-03-31 14:46:53,055 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\check_db_schema.py', reloading
+2026-03-31 14:46:53,058 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\check_db_schema.py', reloading
+2026-03-31 14:46:53,120 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\check_db_schema.py', reloading
+2026-03-31 14:46:53,535 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:46:53,565 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:46:53,569 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:46:53,619 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:46:57,023 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:46:57,029 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:46:57,042 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:46:57,044 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:46:57,049 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:46:57,049 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:46:57,071 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:46:57,077 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:46:57,104 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:46:57,113 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:46:57,122 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:46:57,131 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:46:57,138 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:46:57,152 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:46:57,171 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:46:57,180 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:47:31,120 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\test_chatbot.py', reloading
+2026-03-31 14:47:31,136 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\test_chatbot.py', reloading
+2026-03-31 14:47:31,183 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\test_chatbot.py', reloading
+2026-03-31 14:47:31,240 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\test_chatbot.py', reloading
+2026-03-31 14:47:31,509 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:47:31,526 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:47:31,611 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:47:31,644 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:47:34,551 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:47:34,556 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:47:34,587 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:47:34,592 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:47:34,596 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:47:34,601 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:47:34,606 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:47:34,612 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:47:34,628 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:47:34,634 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:47:34,662 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:47:34,671 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:47:34,671 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:47:34,672 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:47:34,678 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:47:34,680 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:47:43,216 - __main__ - ERROR - Login error: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2026-03-31 14:47:43,218 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:47:43] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2026-03-31 14:47:45,285 - __main__ - WARNING - Unauthorized access attempt to ai_engine
+2026-03-31 14:47:45,287 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:47:45] "[31m[1mPOST /ai_engine HTTP/1.1[0m" 401 -
+2026-03-31 14:47:47,352 - __main__ - WARNING - Unauthorized access attempt to ai_engine
+2026-03-31 14:47:47,354 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:47:47] "[31m[1mPOST /ai_engine HTTP/1.1[0m" 401 -
+2026-03-31 14:47:49,414 - __main__ - WARNING - Unauthorized access attempt to ai_engine
+2026-03-31 14:47:49,416 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:47:49] "[31m[1mPOST /ai_engine HTTP/1.1[0m" 401 -
+2026-03-31 14:47:51,485 - __main__ - WARNING - Unauthorized access attempt to ai_engine
+2026-03-31 14:47:51,486 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:47:51] "[31m[1mPOST /ai_engine HTTP/1.1[0m" 401 -
+2026-03-31 14:48:14,862 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:48:14,867 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:48:14,968 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-31 14:48:14,969 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-31 14:48:14,973 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:48:17,711 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:48:17,714 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:48:17,762 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:48:17,766 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:48:54,988 - __main__ - ERROR - Login error: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2026-03-31 14:48:54,989 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:48:54] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2026-03-31 14:48:57,045 - __main__ - WARNING - Unauthorized access attempt to ai_engine
+2026-03-31 14:48:57,046 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:48:57] "[31m[1mPOST /ai_engine HTTP/1.1[0m" 401 -
+2026-03-31 14:48:59,093 - __main__ - WARNING - Unauthorized access attempt to ai_engine
+2026-03-31 14:48:59,095 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:48:59] "[31m[1mPOST /ai_engine HTTP/1.1[0m" 401 -
+2026-03-31 14:49:01,142 - __main__ - WARNING - Unauthorized access attempt to ai_engine
+2026-03-31 14:49:01,143 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:49:01] "[31m[1mPOST /ai_engine HTTP/1.1[0m" 401 -
+2026-03-31 14:49:03,198 - __main__ - WARNING - Unauthorized access attempt to ai_engine
+2026-03-31 14:49:03,200 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:49:03] "[31m[1mPOST /ai_engine HTTP/1.1[0m" 401 -
+2026-03-31 14:49:19,898 - app - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:49:19,901 - app - INFO - Database initialized successfully
+2026-03-31 14:50:46,694 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:50:46,697 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:50:46,751 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-31 14:50:46,752 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-31 14:50:46,754 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:50:48,663 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:50:48,666 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:50:48,707 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:50:48,711 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:54:16,371 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\test_login_debug.py', reloading
+2026-03-31 14:54:17,006 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:54:17,075 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\test_login_debug.py', reloading
+2026-03-31 14:54:17,141 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\test_login_debug.py', reloading
+2026-03-31 14:54:17,497 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\test_login_debug.py', reloading
+2026-03-31 14:54:17,770 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:54:17,791 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:54:18,033 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:54:21,122 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:54:21,131 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:54:21,221 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:54:21,231 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:54:21,256 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:54:21,263 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:54:21,311 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:54:21,317 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:54:21,341 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:54:21,349 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:54:21,394 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:54:21,401 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:54:21,404 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:54:21,413 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:54:21,479 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:54:21,487 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:54:27,022 - __main__ - ERROR - Login error: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2026-03-31 14:54:27,023 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:54:27] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2026-03-31 14:54:29,073 - __main__ - WARNING - Unauthorized access attempt to ai_engine
+2026-03-31 14:54:29,074 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:54:29] "[31m[1mPOST /ai_engine HTTP/1.1[0m" 401 -
+2026-03-31 14:55:01,324 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:55:01,479 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:55:01,514 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:55:01,519 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 14:55:01,672 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:55:01,886 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:55:01,907 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:55:01,922 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 14:55:04,712 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:55:04,717 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:55:04,777 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:55:04,783 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:55:04,790 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:55:04,794 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:55:04,798 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:55:04,802 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:55:04,807 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 14:55:04,811 - __main__ - INFO - Database initialized successfully
+2026-03-31 14:55:04,859 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:55:04,864 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:55:04,867 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:55:04,873 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:55:04,877 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 14:55:04,885 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 14:55:20,069 - __main__ - INFO - User logged in: patient@hospital.com (patient)
+2026-03-31 14:55:20,071 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:55:20] "POST /login HTTP/1.1" 200 -
+2026-03-31 14:55:22,746 - __main__ - ERROR - OpenRouter API error 405: 
+2026-03-31 14:55:22,748 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:55:22] "POST /ai_engine HTTP/1.1" 200 -
+2026-03-31 14:55:42,206 - __main__ - INFO - User logged in: patient@hospital.com (patient)
+2026-03-31 14:55:42,207 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:55:42] "POST /login HTTP/1.1" 200 -
+2026-03-31 14:55:44,763 - __main__ - ERROR - OpenRouter API error 405: 
+2026-03-31 14:55:44,765 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:55:44] "POST /ai_engine HTTP/1.1" 200 -
+2026-03-31 14:55:47,329 - __main__ - ERROR - OpenRouter API error 405: 
+2026-03-31 14:55:47,335 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:55:47] "POST /ai_engine HTTP/1.1" 200 -
+2026-03-31 14:55:49,904 - __main__ - ERROR - OpenRouter API error 405: 
+2026-03-31 14:55:49,905 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:55:49] "POST /ai_engine HTTP/1.1" 200 -
+2026-03-31 14:55:52,517 - __main__ - ERROR - OpenRouter API error 405: 
+2026-03-31 14:55:52,520 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:55:52] "POST /ai_engine HTTP/1.1" 200 -
+2026-03-31 14:56:26,598 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:56:26] "GET /patient_dashboard HTTP/1.1" 200 -
+2026-03-31 14:56:26,758 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:56:26] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 14:56:26,760 - __main__ - WARNING - Forbidden access attempt - role patient to fetch_records
+2026-03-31 14:56:26,760 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:56:26] "GET /get_prescriptions HTTP/1.1" 200 -
+2026-03-31 14:56:26,761 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:56:26] "[31m[1mGET /fetch_records HTTP/1.1[0m" 403 -
+2026-03-31 14:56:32,410 - __main__ - ERROR - OpenRouter API error 405: 
+2026-03-31 14:56:32,412 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:56:32] "POST /ai_engine HTTP/1.1" 200 -
+2026-03-31 14:56:59,719 - __main__ - ERROR - OpenRouter API error 405: 
+2026-03-31 14:56:59,721 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:56:59] "POST /ai_engine HTTP/1.1" 200 -
+2026-03-31 14:57:12,888 - __main__ - ERROR - OpenRouter API error 405: 
+2026-03-31 14:57:12,890 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:57:12] "POST /ai_engine HTTP/1.1" 200 -
+2026-03-31 14:57:25,813 - __main__ - ERROR - OpenRouter API error 405: 
+2026-03-31 14:57:25,815 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:57:25] "POST /ai_engine HTTP/1.1" 200 -
+2026-03-31 14:58:01,209 - __main__ - ERROR - OpenRouter API error 405: 
+2026-03-31 14:58:01,213 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:58:01] "POST /ai_engine HTTP/1.1" 200 -
+2026-03-31 14:58:23,142 - __main__ - ERROR - OpenRouter API error 405: 
+2026-03-31 14:58:23,145 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:58:23] "POST /ai_engine HTTP/1.1" 200 -
+2026-03-31 14:58:27,351 - __main__ - ERROR - OpenRouter API error 405: 
+2026-03-31 14:58:27,354 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:58:27] "POST /ai_engine HTTP/1.1" 200 -
+2026-03-31 14:58:33,020 - __main__ - ERROR - OpenRouter API error 405: 
+2026-03-31 14:58:33,022 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:58:33] "POST /ai_engine HTTP/1.1" 200 -
+2026-03-31 14:58:39,986 - __main__ - ERROR - OpenRouter API error 405: 
+2026-03-31 14:58:39,989 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:58:39] "POST /ai_engine HTTP/1.1" 200 -
+2026-03-31 14:58:42,066 - __main__ - ERROR - OpenRouter API error 405: 
+2026-03-31 14:58:42,068 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:58:42] "POST /ai_engine HTTP/1.1" 200 -
+2026-03-31 14:58:59,731 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:58:59] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-03-31 14:58:59,748 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:58:59] "GET / HTTP/1.1" 200 -
+2026-03-31 14:58:59,931 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:58:59] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-31 14:59:09,297 - __main__ - INFO - User logged in: resp@gmail.com (receptionist)
+2026-03-31 14:59:09,298 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:59:09] "POST /login HTTP/1.1" 200 -
+2026-03-31 14:59:09,337 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:59:09] "GET /receptionist_dashboard HTTP/1.1" 200 -
+2026-03-31 14:59:09,397 - __main__ - INFO - Patient records fetched - 1 records
+2026-03-31 14:59:09,398 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 14:59:09] "GET /fetch_records HTTP/1.1" 200 -
+2026-03-31 15:00:52,024 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:00:52] "GET /receptionist_dashboard HTTP/1.1" 200 -
+2026-03-31 15:00:52,087 - __main__ - INFO - Patient records fetched - 1 records
+2026-03-31 15:00:52,088 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:00:52] "GET /fetch_records HTTP/1.1" 200 -
+2026-03-31 15:01:03,570 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:01:03] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:01:04,643 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:01:04] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:02:00,421 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 15:02:00,423 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\test_login_debug.py', reloading
+2026-03-31 15:02:00,432 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\test_chatbot.py', reloading
+2026-03-31 15:02:00,733 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 15:02:00,741 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 15:02:00,744 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 15:02:03,490 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 15:02:03,494 - __main__ - INFO - Database initialized successfully
+2026-03-31 15:02:03,499 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 15:02:03,502 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 15:02:03,503 - __main__ - INFO - Database initialized successfully
+2026-03-31 15:02:03,507 - __main__ - INFO - Database initialized successfully
+2026-03-31 15:02:03,556 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 15:02:03,559 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 15:02:03,562 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 15:02:03,562 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 15:02:03,565 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 15:02:03,569 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 15:03:27,131 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 15:03:27,179 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 15:03:27,251 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 15:03:27,472 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 15:03:27,521 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 15:03:27,594 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 15:03:30,178 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 15:03:30,181 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 15:03:30,182 - __main__ - INFO - Database initialized successfully
+2026-03-31 15:03:30,186 - __main__ - INFO - Database initialized successfully
+2026-03-31 15:03:30,215 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 15:03:30,220 - __main__ - INFO - Database initialized successfully
+2026-03-31 15:03:30,235 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 15:03:30,239 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 15:03:30,242 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 15:03:30,247 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 15:03:30,275 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 15:03:30,280 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 15:04:13,631 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 15:04:13,632 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 15:04:13,670 - werkzeug - INFO -  * Detected change in 'D:\\HRMS\\app.py', reloading
+2026-03-31 15:04:13,993 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 15:04:13,995 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 15:04:14,016 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 15:04:16,609 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 15:04:16,613 - __main__ - INFO - Database initialized successfully
+2026-03-31 15:04:16,619 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 15:04:16,622 - __main__ - INFO - Database initialized successfully
+2026-03-31 15:04:16,624 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 15:04:16,629 - __main__ - INFO - Database initialized successfully
+2026-03-31 15:04:16,672 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 15:04:16,681 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 15:04:16,687 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 15:04:16,691 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 15:04:16,694 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 15:04:16,699 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 15:06:06,669 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:06:06] "GET /receptionist_dashboard HTTP/1.1" 200 -
+2026-03-31 15:06:06,736 - __main__ - INFO - Patient data synced - 1 records, 2 user accounts
+2026-03-31 15:06:06,738 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:06:06] "GET /get_all_patients_and_records HTTP/1.1" 200 -
+2026-03-31 15:06:17,639 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:06:17,639 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:06:17] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:06:17,654 - __main__ - INFO - Patient data synced - 1 records, 2 user accounts
+2026-03-31 15:06:17,655 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:06:17] "GET /get_all_patients_and_records HTTP/1.1" 200 -
+2026-03-31 15:06:26,740 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:06:26,740 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:06:26] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:06:26,748 - __main__ - INFO - Patient data synced - 1 records, 2 user accounts
+2026-03-31 15:06:26,749 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:06:26] "GET /get_all_patients_and_records HTTP/1.1" 200 -
+2026-03-31 15:06:37,877 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:06:37,878 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:06:37] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:06:37,888 - __main__ - INFO - Patient data synced - 1 records, 2 user accounts
+2026-03-31 15:06:37,889 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:06:37] "GET /get_all_patients_and_records HTTP/1.1" 200 -
+2026-03-31 15:06:40,082 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:06:40] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:06:46,741 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:06:46,742 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:06:46] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:06:46,749 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:06:46] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:06:48,024 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:06:48] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:06:51,107 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:06:51] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:06:53,719 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:06:53] "GET /get_billing_history HTTP/1.1" 200 -
+2026-03-31 15:06:56,748 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:06:56,749 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:06:56] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:06:56,761 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:06:56] "GET /get_billing_history HTTP/1.1" 200 -
+2026-03-31 15:06:59,578 - __main__ - INFO - Patient data synced - 1 records, 2 user accounts
+2026-03-31 15:06:59,579 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:06:59] "GET /get_all_patients_and_records HTTP/1.1" 200 -
+2026-03-31 15:07:01,300 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:01] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:07:06,736 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:07:06,737 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:06] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:07:06,744 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:06] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:07:11,011 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:11] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:07:14,279 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:14] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-03-31 15:07:16,745 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:07:16,748 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:16] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:07:16,762 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:16] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:07:26,749 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:07:26,749 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:26] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:07:26,758 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:26] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:07:31,497 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:31] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:07:33,450 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:33] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:07:36,745 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:07:36,746 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:36] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:07:36,756 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:36] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:07:46,743 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:07:46,744 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:46] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:07:46,752 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:46] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:07:51,303 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:51] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:07:52,771 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:52] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:07:55,201 - __main__ - INFO - Patient data synced - 1 records, 2 user accounts
+2026-03-31 15:07:55,202 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:55] "GET /get_all_patients_and_records HTTP/1.1" 200 -
+2026-03-31 15:07:56,743 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:07:56,744 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:56] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:07:56,754 - __main__ - INFO - Patient data synced - 1 records, 2 user accounts
+2026-03-31 15:07:56,755 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:07:56] "GET /get_all_patients_and_records HTTP/1.1" 200 -
+2026-03-31 15:08:00,435 - __main__ - WARNING - Forbidden access attempt - role receptionist to patient_dashboard
+2026-03-31 15:08:00,436 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:08:00] "[31m[1mGET /patient_dashboard HTTP/1.1[0m" 403 -
+2026-03-31 15:08:02,302 - __main__ - WARNING - Forbidden access attempt - role receptionist to patient_dashboard
+2026-03-31 15:08:02,303 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:08:02] "[31m[1mGET /patient_dashboard HTTP/1.1[0m" 403 -
+2026-03-31 15:08:04,901 - __main__ - WARNING - Forbidden access attempt - role receptionist to patient_dashboard
+2026-03-31 15:08:04,902 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:08:04] "[31m[1mGET /patient_dashboard HTTP/1.1[0m" 403 -
+2026-03-31 15:08:07,639 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:08:07,641 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:08:07] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:08:07,653 - __main__ - INFO - Patient data synced - 1 records, 2 user accounts
+2026-03-31 15:08:07,654 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:08:07] "GET /get_all_patients_and_records HTTP/1.1" 200 -
+2026-03-31 15:08:17,623 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:08:17,623 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:08:17] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:08:17,631 - __main__ - INFO - Patient data synced - 1 records, 2 user accounts
+2026-03-31 15:08:17,632 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:08:17] "GET /get_all_patients_and_records HTTP/1.1" 200 -
+2026-03-31 15:08:25,911 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:08:25] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-03-31 15:08:25,927 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:08:25] "GET / HTTP/1.1" 200 -
+2026-03-31 15:08:26,103 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:08:26] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-31 15:08:35,717 - __main__ - INFO - User logged in: pat@gmail.com (patient)
+2026-03-31 15:08:35,718 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:08:35] "POST /login HTTP/1.1" 200 -
+2026-03-31 15:08:35,761 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:08:35] "GET /patient_dashboard HTTP/1.1" 200 -
+2026-03-31 15:08:35,843 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:08:35] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:08:35,849 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:08:35] "GET /get_prescriptions HTTP/1.1" 200 -
+2026-03-31 15:08:35,849 - __main__ - INFO - Patient records fetched - 1 records
+2026-03-31 15:08:35,852 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:08:35] "GET /fetch_records HTTP/1.1" 200 -
+2026-03-31 15:09:20,971 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:09:20] "GET / HTTP/1.1" 200 -
+2026-03-31 15:09:21,026 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:09:21] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-31 15:09:28,502 - __main__ - INFO - User logged in: doct@gmail.com (doctor)
+2026-03-31 15:09:28,503 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:09:28] "POST /login HTTP/1.1" 200 -
+2026-03-31 15:09:28,546 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:09:28] "GET /doctor_dashboard HTTP/1.1" 200 -
+2026-03-31 15:09:28,659 - __main__ - INFO - Patient records fetched - 1 records
+2026-03-31 15:09:28,661 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:09:28] "GET /fetch_records HTTP/1.1" 200 -
+2026-03-31 15:09:28,663 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:09:28] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:09:28,665 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:09:28] "GET /get_prescriptions HTTP/1.1" 200 -
+2026-03-31 15:09:59,843 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:09:59] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-03-31 15:09:59,853 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:09:59] "GET / HTTP/1.1" 200 -
+2026-03-31 15:09:59,902 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:09:59] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-03-31 15:10:09,962 - __main__ - INFO - User logged in: resp@gmail.com (receptionist)
+2026-03-31 15:10:09,964 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:10:09] "POST /login HTTP/1.1" 200 -
+2026-03-31 15:10:09,993 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:10:09] "GET /receptionist_dashboard HTTP/1.1" 200 -
+2026-03-31 15:10:10,084 - __main__ - INFO - Patient data synced - 1 records, 2 user accounts
+2026-03-31 15:10:10,085 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:10:10] "GET /get_all_patients_and_records HTTP/1.1" 200 -
+2026-03-31 15:10:13,054 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:10:13] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:10:20,093 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:10:20,093 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:10:20] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:10:20,100 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:10:20] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:10:21,360 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:10:21] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:10:30,083 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:10:30,084 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:10:30] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:10:30,095 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:10:30] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:10:40,637 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:10:40,638 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:10:40] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:10:40,645 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:10:40] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:10:50,629 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:10:50,629 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:10:50] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:10:50,638 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:10:50] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:11:00,089 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:11:00,090 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:11:00] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:11:00,098 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:11:00] "GET /get_all_hospitals HTTP/1.1" 200 -
+2026-03-31 15:11:01,585 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:11:01] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:11:10,625 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:11:10,625 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:11:10] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:11:10,632 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:11:10] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:11:20,631 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:11:20,632 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:11:20] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:11:20,640 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:11:20] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:11:30,631 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:11:30,632 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:11:30] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:11:30,642 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:11:30] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:11:40,632 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:11:40,633 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:11:40] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:11:40,646 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:11:40] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:11:50,639 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:11:50,641 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:11:50] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:11:50,650 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:11:50] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:12:00,635 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:12:00,636 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:12:00] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:12:00,643 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:12:00] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:12:29,637 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:12:29,638 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:12:29] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:12:29,649 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:12:29] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:13:29,626 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:13:29,627 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:13:29] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:13:29,636 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:13:29] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:14:29,637 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:14:29,638 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:14:29] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:14:29,649 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:14:29] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:15:29,642 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:15:29,643 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:15:29] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:15:29,651 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:15:29] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:16:14,070 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 15:16:14,073 - __main__ - INFO - Database initialized successfully
+2026-03-31 15:16:14,135 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-31 15:16:14,135 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-03-31 15:16:14,137 - werkzeug - INFO -  * Restarting with stat
+2026-03-31 15:16:16,108 - __main__ - INFO - [OK] OpenRouter API key loaded successfully
+2026-03-31 15:16:16,110 - __main__ - INFO - Database initialized successfully
+2026-03-31 15:16:16,153 - werkzeug - WARNING -  * Debugger is active!
+2026-03-31 15:16:16,157 - werkzeug - INFO -  * Debugger PIN: 105-661-874
+2026-03-31 15:16:29,625 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:16:29,627 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:16:29] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:16:29,637 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:16:29] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:17:29,640 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:17:29,641 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:17:29] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:17:29,651 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:17:29] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:18:29,639 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:18:29,640 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:18:29] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:18:29,649 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:18:29] "GET /get_appointments HTTP/1.1" 200 -
+2026-03-31 15:19:13,291 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:19:13] "GET / HTTP/1.1" 200 -
+2026-03-31 15:19:13,558 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:19:13] "GET /static/style.css HTTP/1.1" 200 -
+2026-03-31 15:19:13,777 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:19:13] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-03-31 15:19:29,639 - __main__ - INFO - Dashboard data refreshed for receptionist
+2026-03-31 15:19:29,639 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:19:29] "GET /refresh_dashboard_data HTTP/1.1" 200 -
+2026-03-31 15:19:29,652 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2026 15:19:29] "GET /get_appointments HTTP/1.1" 200 -

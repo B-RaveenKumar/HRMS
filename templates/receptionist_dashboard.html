@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receptionist Dashboard - Hospital Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --info-color: #3498db;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ecf0f1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #2c3e50;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            padding: 15px 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 990;
+        }
+
+        .navbar h1 {
+            color: white;
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .navbar-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            color: white;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        .container-fluid {
+            padding: 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .stat-card.success { border-left-color: var(--success-color); }
+        .stat-card.warning { border-left-color: var(--warning-color); }
+        .stat-card.danger { border-left-color: var(--danger-color); }
+        .stat-card.info { border-left-color: var(--info-color); }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .stat-card.success .stat-icon { color: var(--success-color); }
+        .stat-card.warning .stat-icon { color: var(--warning-color); }
+        .stat-card.danger .stat-icon { color: var(--danger-color); }
+        .stat-card.info .stat-icon { color: var(--info-color); }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+
+        .nav-tabs {
+            border-bottom: 2px solid #bdc3c7;
+            margin-bottom: 30px;
+        }
+
+        .nav-link {
+            color: var(--primary-color);
+            border: none;
+            padding: 12px 20px;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .nav-link.active {
+            color: white;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            border-bottom-color: var(--info-color);
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .data-table {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .table thead {
+            background: #f8f9fa;
+            border-top: none;
+        }
+
+        .table th {
+            color: var(--primary-color);
+            font-weight: 600;
+            border: none;
+            padding: 15px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .table td {
+            padding: 15px;
+            border-color: #ecf0f1;
+        }
+
+        .table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .btn-group-custom {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background: #34495e;
+            border-color: #34495e;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .status-pending { background: #fef5e7; color: #f39c12; }
+        .status-confirmed { background: #e8f4f8; color: #3498db; }
+        .status-completed { background: #e8f8f5; color: #27ae60; }
+        .status-cancelled { background: #fadbd8; color: #e74c3c; }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            color: white;
+            border-bottom: none;
+        }
+
+        .modal-header .btn-close {
+            filter: brightness(0) invert(1);
+        }
+
+        .form-control, .form-select {
+            border: 1px solid #bdc3c7;
+            border-radius: 6px;
+            padding: 10px 15px;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
+        }
+
+        .alert {
+            border-radius: 6px;
+            border: none;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #95a5a6;
+            padding: 20px;
+            border-top: 1px solid #bdc3c7;
+            margin-top: 40px;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            padding-left: 40px;
+            border-radius: 6px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #95a5a6;
+        }
+
+        .action-menu {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .quick-action {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 6px;
+            border: 2px solid #bdc3c7;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .quick-action:hover {
+            border-color: var(--primary-color);
+            background: #f8f9fa;
+        }
+
+        .quick-action i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .log-entry {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--info-color);
+            border-radius: 4px;
+        }
+
+        .log-time {
+            color: #95a5a6;
+            font-size: 0.85rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .action-menu {
+                flex-direction: column;
+            }
+            .quick-action {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="container-fluid">
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <h1><i class="fas fa-hospital"></i> Hospital Management System</h1>
+            <div class="navbar-right">
+                <div class="user-info">
+                    <div class="user-avatar">{{ user_name[0] if user_name else 'R' }}</div>
+                    <div>
+                        <div style="font-weight: 500;">{{ user_name or 'Receptionist' }}</div>
+                        <div style="font-size: 0.85rem; opacity: 0.9;">Receptionist</div>
+                    </div>
+                </div>
+                <a href="/logout" class="btn btn-outline-light btn-sm">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="container-fluid">
+    <!-- STATISTICS OVERVIEW -->
+    <div class="stats-grid">
+        <div class="stat-card success">
+            <div class="stat-icon"><i class="fas fa-users"></i></div>
+            <div class="stat-value" id="total-patients">0</div>
+            <div class="stat-label">Total Patients</div>
+        </div>
+
+        <div class="stat-card info">
+            <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+            <div class="stat-value" id="today-appointments">0</div>
+            <div class="stat-label">Today's Appointments</div>
+        </div>
+
+        <div class="stat-card warning">
+            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+            <div class="stat-value" id="pending-bills">0</div>
+            <div class="stat-label">Pending Bills</div>
+        </div>
+
+        <div class="stat-card danger">
+            <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="stat-value" id="urgent-tasks">0</div>
+            <div class="stat-label">Urgent Tasks</div>
+        </div>
+    </div>
+
+    <!-- QUICK ACTIONS -->
+    <div class="action-menu">
+        <div class="quick-action" onclick="switchTab('patients')">
+            <i class="fas fa-users-cog"></i>
+            <div>Patient Management</div>
+        </div>
+        <div class="quick-action" onclick="switchTab('appointments')">
+            <i class="fas fa-calendar-alt"></i>
+            <div>Manage Appointments</div>
+        </div>
+        <div class="quick-action" onclick="switchTab('billing')">
+            <i class="fas fa-receipt"></i>
+            <div>Billing & Invoicing</div>
+        </div>
+        <div class="quick-action" onclick="switchTab('doctors')">
+            <i class="fas fa-user-md"></i>
+            <div>Doctor Schedule</div>
+        </div>
+        <div class="quick-action" onclick="switchTab('reports')">
+            <i class="fas fa-chart-bar"></i>
+            <div>Reports & Analytics</div>
+        </div>
+    </div>
+
+    <!-- TABS -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" onclick="switchTab('patients')"><i class="fas fa-users"></i> Patient Management</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" onclick="switchTab('appointments')"><i class="fas fa-calendar"></i> Appointments</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" onclick="switchTab('billing')"><i class="fas fa-file-invoice-dollar"></i> Billing</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" onclick="switchTab('doctors')"><i class="fas fa-hospital-user"></i> Doctor Management</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" onclick="switchTab('reports')"><i class="fas fa-chart-line"></i> Reports</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" onclick="switchTab('activity')"><i class="fas fa-history"></i> Activity Log</a>
+        </li>
+    </ul>
+
+    <!-- TAB 1: PATIENT MANAGEMENT -->
+    <div id="patients" class="content-section active">
+        <div class="data-table">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h4><i class="fas fa-users-cog"></i> Patient Records</h4>
+                <button class="btn btn-primary" onclick="openRegisterPatientModal()">
+                    <i class="fas fa-plus"></i> Register New Patient
+                </button>
+            </div>
+
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search by patient name, ID, or phone..." id="patient-search" 
+                       onkeyup="filterPatients()">
+            </div>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Contact</th>
+                        <th>Admission Date</th>
+                        <th>Current Treatment</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="patients-table-body">
+                    <tr>
+                        <td colspan="8" class="text-center text-muted">Loading patients...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- TAB 2: APPOINTMENTS -->
+    <div id="appointments" class="content-section">
+        <div class="data-table">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h4><i class="fas fa-calendar-alt"></i> Appointment Management</h4>
+                <button class="btn btn-primary" onclick="openScheduleAppointmentModal()">
+                    <i class="fas fa-plus"></i> Schedule Appointment
+                </button>
+            </div>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Appointment ID</th>
+                        <th>Patient Name</th>
+                        <th>Doctor</th>
+                        <th>Date & Time</th>
+                        <th>Department</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="appointments-table-body">
+                    <tr>
+                        <td colspan="7" class="text-center text-muted">No appointments scheduled</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- TAB 3: BILLING -->
+    <div id="billing" class="content-section">
+        <div class="data-table">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h4><i class="fas fa-file-invoice-dollar"></i> Billing Management</h4>
+                <button class="btn btn-primary" onclick="openCreateInvoiceModal()">
+                    <i class="fas fa-plus"></i> Create Invoice
+                </button>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid var(--success);">
+                    <div style="color: #6b7280; font-size: 0.9rem;">Total Revenue</div>
+                    <div style="font-size: 1.8rem; font-weight: bold; color: var(--success);">$0</div>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid var(--warning);">
+                    <div style="color: #6b7280; font-size: 0.9rem;">Pending Payments</div>
+                    <div style="font-size: 1.8rem; font-weight: bold; color: var(--warning);">$0</div>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid var(--info);">
+                    <div style="color: #6b7280; font-size: 0.9rem;">Total Invoices</div>
+                    <div style="font-size: 1.8rem; font-weight: bold; color: var(--info);">0</div>
+                </div>
+            </div>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Invoice #</th>
+                        <th>Patient</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="billing-table-body">
+                    <tr>
+                        <td colspan="7" class="text-center text-muted">No invoices found</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- TAB 4: DOCTOR MANAGEMENT -->
+    <div id="doctors" class="content-section">
+        <div class="data-table">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h4><i class="fas fa-hospital-user"></i> Doctor Schedule & Availability</h4>
+                <button class="btn btn-primary" onclick="openAddDoctorModal()">
+                    <i class="fas fa-plus"></i> Add Doctor Schedule
+                </button>
+            </div>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Doctor Name</th>
+                        <th>Specialization</th>
+                        <th>Hospital</th>
+                        <th>Time Slot</th>
+                        <th>Patients in Queue</th>
+                        <th>Max Capacity</th>
+                        <th>Availability</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="doctors-table-body">
+                    <tr>
+                        <td colspan="8" class="text-center text-muted">Loading doctor schedules...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- TAB 5: REPORTS & ANALYTICS -->
+    <div id="reports" class="content-section">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="data-table">
+                    <h4><i class="fas fa-chart-pie"></i> Patient Statistics</h4>
+                    <div style="margin-top: 20px;">
+                        <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e5e7eb;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span>New Patients (This Month)</span>
+                                <strong id="stat-new-patients">0</strong>
+                            </div>
+                            <div style="background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div style="background: var(--success); height: 100%; width: 60%;"></div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e5e7eb;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span>Appointments Completed</span>
+                                <strong id="stat-completed-appts">0</strong>
+                            </div>
+                            <div style="background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div style="background: var(--info); height: 100%; width: 45%;"></div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e5e7eb;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span>Average Patient Satisfaction</span>
+                                <strong id="stat-satisfaction">0%</strong>
+                            </div>
+                            <div style="background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div style="background: var(--warning); height: 100%; width: 85%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="data-table">
+                    <h4><i class="fas fa-chart-bar"></i> Revenue Report</h4>
+                    <div style="margin-top: 20px;">
+                        <div style="margin-bottom: 15px;">
+                            <div style="color: #6b7280; font-size: 0.9rem;">This Month</div>
+                            <div style="font-size: 1.8rem; font-weight: bold; color: var(--success);">$0</div>
+                        </div>
+                        <div style="margin-bottom: 15px; padding: 15px; background: #f9fafb; border-radius: 8px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span>Consultation Fees</span>
+                                <strong>$0</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span>Treatment Charges</span>
+                                <strong>$0</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Medication Cost</span>
+                                <strong>$0</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 6: ACTIVITY LOG -->
+    <div id="activity" class="content-section">
+        <div class="data-table">
+            <h4><i class="fas fa-history"></i> Recent Activities</h4>
+            <div id="activity-log-body" style="margin-top: 20px;">
+                <div class="text-center text-muted">No recent activities</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 Hospital Management System - Receptionist Portal | Designed for efficient healthcare administration</p>
+</div>
+
+<!-- MODALS -->
+
+<!-- Register Patient Modal -->
+<div class="modal fade" id="registerPatientModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-user-plus"></i> Register New Patient</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="registerPatientForm">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Full Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="reg-patient-name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Age <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="reg-patient-age" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Phone <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" id="reg-patient-phone" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="reg-patient-email">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Blood Type</label>
+                            <select class="form-select" id="reg-patient-blood">
+                                <option value="">Select Blood Type</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Primary Condition</label>
+                            <input type="text" class="form-control" id="reg-patient-condition">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <textarea class="form-control" id="reg-patient-address" rows="2"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="registerNewPatient()">
+                    <i class="fas fa-check"></i> Register Patient
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Schedule Appointment Modal -->
+<div class="modal fade" id="scheduleAppointmentModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-calendar-plus"></i> Schedule Appointment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="scheduleAppointmentForm">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Patient Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="appt-patient-name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Doctor <span class="text-danger">*</span></label>
+                            <select class="form-select" id="appt-doctor" required></select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Date <span class="text-danger">*</span></label>
+                            <input type="date" class="form-control" id="appt-date" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Time <span class="text-danger">*</span></label>
+                            <input type="time" class="form-control" id="appt-time" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Reason for Visit</label>
+                        <textarea class="form-control" id="appt-reason" rows="2"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="scheduleAppointment()">
+                    <i class="fas fa-check"></i> Schedule
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Create Invoice Modal -->
+<div class="modal fade" id="createInvoiceModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-file-invoice"></i> Create Invoice</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="createInvoiceForm">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Patient Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="inv-patient-name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Amount <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="inv-amount" step="0.01" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="inv-description" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Due Date</label>
+                        <input type="date" class="form-control" id="inv-due-date">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="createInvoice()">
+                    <i class="fas fa-check"></i> Create Invoice
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Auto-refresh data every 5 seconds
+    let autoRefreshInterval;
+    
+    // Tab switching
+    function switchTab(tabName) {
+        document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+        document.getElementById(tabName).classList.add('active');
+        event.target.classList.add('active');
+        loadTabData(tabName);
+    }
+
+    // Load tab data
+    async function loadTabData(tabName) {
+        if (tabName === 'patients') {
+            await loadPatients();
+        } else if (tabName === 'appointments') {
+            await loadAppointments();
+        } else if (tabName === 'billing') {
+            await loadBilling();
+        } else if (tabName === 'doctors') {
+            await loadDoctorSchedules();
+        }
+    }
+
+    // Load patients data (from both records and users table)
+    async function loadPatients() {
+        try {
+            const response = await fetch('/get_all_patients_and_records');
+            const data = await response.json();
+            const tbody = document.getElementById('patients-table-body');
+            
+            // Combine data from both sources for comprehensive view
+            const allPatients = [];
+            
+            // Add records from records table
+            if (data.records && data.records.length > 0) {
+                allPatients.push(...data.records.map(r => ({
+                    id: r[0],
+                    name: r[1],
+                    age: r[2],
+                    disease: r[3],
+                    admit_date: r[4],
+                    stay: r[5],
+                    source: 'medical_record'
+                })));
+            }
+            
+            // Add patient users
+            if (data.users && data.users.length > 0) {
+                allPatients.push(...data.users.map(u => ({
+                    id: u[0],
+                    name: u[1],
+                    email: u[2],
+                    phone: u[3],
+                    joined: u[4],
+                    source: 'user_account'
+                })));
+            }
+            
+            if (allPatients.length > 0) {
+                tbody.innerHTML = allPatients.map(p => `
+                    <tr>
+                        <td>#${p.id}</td>
+                        <td>${p.name}</td>
+                        <td>${p.age || 'N/A'}</td>
+                        <td>${p.phone || p.email || 'N/A'}</td>
+                        <td>${p.admit_date || p.joined || 'N/A'}</td>
+                        <td>${p.disease || 'Not specified'}</td>
+                        <td><span class="status-badge status-completed">${p.source === 'medical_record' ? 'Medical' : 'User'}</span></td>
+                        <td>
+                            <div class="btn-group-custom">
+                                <button class="btn btn-sm btn-warning" onclick="editPatient(${p.id})">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="deletePatient(${p.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('');
+                document.getElementById('total-patients').textContent = allPatients.length;
+            } else {
+                tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted">No patient records found</td></tr>';
+            }
+        } catch (e) {
+            console.error('Error loading patients:', e);
+        }
+    }
+
+    // Refresh all dashboard data
+    async function refreshDashboard() {
+        try {
+            console.log('Refreshing dashboard data...');
+            const response = await fetch('/refresh_dashboard_data');
+            const data = await response.json();
+            
+            if (data.success) {
+                console.log('Dashboard refreshed successfully');
+                // Reload current tab
+                const activeTab = document.querySelector('.content-section.active');
+                if (activeTab) {
+                    loadTabData(activeTab.id);
+                }
+            }
+        } catch (e) {
+            console.error('Error refreshing dashboard:', e);
+        }
+    }
+
+    // Load appointments
+    async function loadAppointments() {
+        try {
+            const response = await fetch('/get_appointments');
+            const data = await response.json();
+            const tbody = document.getElementById('appointments-table-body');
+            
+            if (data.appointments && data.appointments.length > 0) {
+                tbody.innerHTML = data.appointments.map(a => `
+                    <tr>
+                        <td>#${a[0]}</td>
+                        <td>${a[1]}</td>
+                        <td>${a[2]}</td>
+                        <td>${a[3]} ${a[4]}</td>
+                        <td>General</td>
+                        <td><span class="status-badge status-confirmed">Confirmed</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" onclick="cancelAppointment(${a[0]})">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+                document.getElementById('today-appointments').textContent = data.appointments.length;
+            } else {
+                tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted">No appointments scheduled</td></tr>';
+            }
+        } catch (e) {
+            console.error('Error loading appointments:', e);
+        }
+    }
+
+    // Load billing data
+    async function loadBilling() {
+        try {
+            const response = await fetch('/get_billing_history');
+            const data = await response.json();
+            console.log('Billing data:', data);
+        } catch (e) {
+            console.error('Error loading billing:', e);
+        }
+    }
+
+    // Load doctor schedules
+    async function loadDoctorSchedules() {
+        try {
+            const response = await fetch('/get_all_hospitals');
+            const data = await response.json();
+            console.log('Doctor schedules:', data);
+        } catch (e) {
+            console.error('Error loading doctor schedules:', e);
+        }
+    }
+
+    // Modal functions
+    function openRegisterPatientModal() {
+        new bootstrap.Modal(document.getElementById('registerPatientModal')).show();
+    }
+
+    function openScheduleAppointmentModal() {
+        new bootstrap.Modal(document.getElementById('scheduleAppointmentModal')).show();
+    }
+
+    function openCreateInvoiceModal() {
+        new bootstrap.Modal(document.getElementById('createInvoiceModal')).show();
+    }
+
+    function openAddDoctorModal() {
+        alert('Add doctor schedule feature');
+    }
+
+    // Action functions
+    async function registerNewPatient() {
+        const name = document.getElementById('reg-patient-name').value;
+        const age = document.getElementById('reg-patient-age').value;
+        const phone = document.getElementById('reg-patient-phone').value;
+        const email = document.getElementById('reg-patient-email').value || '';
+        const condition = document.getElementById('reg-patient-condition').value || '';
+        
+        if (!name || !age || !phone) {
+            alert('Please fill all required fields');
+            return;
+        }
+
+        try {
+            const response = await fetch('/save_data', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    sno: Date.now(),
+                    name: name,
+                    age: age,
+                    disease: condition || 'Pending',
+                    date: new Date().toISOString().split('T')[0],
+                    stay: 0,
+                    fees: 0,
+                    email: email,
+                    phone: phone
+                })
+            });
+
+            const data = await response.json();
+            
+            if (response.ok) {
+                alert('Patient registered successfully!\nA login account has been created with default password: Patient@123');
+                
+                // Clear form
+                document.getElementById('registerPatientForm').reset();
+                
+                // Close modal
+                bootstrap.Modal.getInstance(document.getElementById('registerPatientModal')).hide();
+                
+                // Refresh data immediately
+                await loadPatients();
+                await refreshDashboard();
+            } else {
+                alert('Error: ' + (data.error || 'Failed to register patient'));
+            }
+        } catch (e) {
+            alert('Error: ' + e.message);
+        }
+    }
+
+    async function scheduleAppointment() {
+        alert('Appointment scheduling feature');
+    }
+
+    async function createInvoice() {
+        alert('Invoice creation feature');
+    }
+
+    function editPatient(id) {
+        alert('Edit patient #' + id);
+    }
+
+    function deletePatient(id) {
+        if (confirm('Are you sure you want to delete this patient record?')) {
+            fetch(`/delete_record/${id}`, {method: 'DELETE'})
+                .then(r => r.json())
+                .then(d => {
+                    alert('Patient deleted!');
+                    loadPatients();
+                });
+        }
+    }
+
+    function cancelAppointment(id) {
+        if (confirm('Cancel this appointment?')) {
+            fetch(`/cancel_appointment/${id}`, {method: 'DELETE'})
+                .then(r => r.json())
+                .then(d => {
+                    alert('Appointment cancelled!');
+                    loadAppointments();
+                });
+        }
+    }
+
+    function filterPatients() {
+        const search = document.getElementById('patient-search').value.toLowerCase();
+        const rows = document.querySelectorAll('#patients-table-body tr');
+        rows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(search) ? '' : 'none';
+        });
+    }
+
+    // Load initial data
+    // Load initial data when page loads
+    window.addEventListener('load', () => {
+        loadPatients();
+        
+        // Set up auto-refresh every 10 seconds to sync changes
+        autoRefreshInterval = setInterval(() => {
+            refreshDashboard();
+        }, 10000);
+        
+        console.log('Dashboard initialized - auto-refresh enabled');
+    });
+    
+    // Clean up when page unloads
+    window.addEventListener('beforeunload', () => {
+        if (autoRefreshInterval) {
+            clearInterval(autoRefreshInterval);
+        }
+    });
+</script>
+
+</body>
+</html>

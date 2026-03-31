@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard - MediCare Pro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --info-color: #3498db;
+        }
+        
+        body {
+            background: #ecf0f1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+        
+        .sidebar {
+            background: white;
+            border-right: 2px solid #bdc3c7;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar-menu li {
+            margin: 10px 0;
+        }
+        
+        .sidebar-menu a {
+            display: block;
+            padding: 12px 15px;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            color: white;
+        }
+        
+        .main-content {
+            padding: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .stat-card h3 {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .patient-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--info-color);
+        }
+        
+        .patient-card:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            color: white;
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background: #34495e;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(44,62,80,0.25);
+        }
+        
+        .section-content {
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .badge-status {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.85rem;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="fas fa-hospital-user"></i> MediCare Pro - Doctor Portal
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle"></i> {{ user_name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 sidebar">
+                <ul class="sidebar-menu">
+                    <li><a href="#" onclick="showSection('dashboard')" class="active"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li><a href="#" onclick="showSection('patients')"><i class="fas fa-users"></i> My Patients</a></li>
+                    <li><a href="#" onclick="showSection('appointments')"><i class="fas fa-calendar"></i> Appointments</a></li>
+                    <li><a href="#" onclick="showSection('prescriptions')"><i class="fas fa-prescription"></i> Prescriptions</a></li>
+                    <li><a href="#" onclick="showSection('medical_history')"><i class="fas fa-file-medical"></i> Medical History</a></li>
+                </ul>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 main-content">
+                <!-- Dashboard Section -->
+                <section id="dashboard" class="section-content">
+                    <div class="row mb-4">
+                        <div class="col-md-8">
+                            <h2 class="fw-bold"><i class="fas fa-chart-line text-success"></i> Welcome, Dr. {{ user_name }}</h2>
+                            <p class="text-muted">Monitor your patients and manage appointments</p>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <p class="mb-0"><strong id="current-date"></strong></p>
+                            <p class="text-muted" id="current-time"></p>
+                        </div>
+                    </div>
+
+                    <!-- Statistics -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="stat-card">
+                                <i class="fas fa-users"></i>
+                                <h3 id="total-patients">0</h3>
+                                <p>Total Patients</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card">
+                                <i class="fas fa-calendar-check"></i>
+                                <h3 id="today-appointments">0</h3>
+                                <p>Today's Appointments</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card">
+                                <i class="fas fa-pills"></i>
+                                <h3 id="total-prescriptions">0</h3>
+                                <p>Prescriptions Issued</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card">
+                                <i class="fas fa-history"></i>
+                                <h3 id="medical-records">0</h3>
+                                <p>Medical Records</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header fw-bold">
+                                    <i class="fas fa-tasks"></i> Quick Actions
+                                </div>
+                                <div class="card-body">
+                                    <button class="btn btn-primary w-100 mb-2" onclick="showSection('patients')">
+                                        <i class="fas fa-plus"></i> View Patients
+                                    </button>
+                                    <button class="btn btn-primary w-100 mb-2" onclick="openAddPatientModal()">
+                                        <i class="fas fa-user-plus"></i> Add Patient Details
+                                    </button>
+                                    <button class="btn btn-primary w-100" onclick="showSection('appointments')">
+                                        <i class="fas fa-calendar"></i> View Appointments
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header fw-bold">
+                                    <i class="fas fa-bell"></i> Recent Activity
+                                </div>
+                                <div class="card-body">
+                                    <div id="recent-activity">
+                                        <p class="text-muted">No recent activity</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- My Patients Section -->
+                <section id="patients" class="section-content hidden">
+                    <div class="row mb-4">
+                        <div class="col-md-8">
+                            <h2 class="fw-bold"><i class="fas fa-users"></i> My Patients</h2>
+                            <p class="text-muted">View and manage your patient list</p>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <button class="btn btn-primary" onclick="openAddPatientModal()">
+                                <i class="fas fa-user-plus"></i> Add Patient
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search patients..." id="patient-search"
+                               onkeyup="filterPatients()">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+
+                    <div id="patients-list">
+                        <p class="text-center text-muted">Loading patients...</p>
+                    </div>
+                </section>
+
+                <!-- Appointments Section -->
+                <section id="appointments" class="section-content hidden">
+                    <h2 class="fw-bold mb-4"><i class="fas fa-calendar"></i> My Appointments</h2>
+                    <ul class="nav nav-tabs mb-3" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" onclick="filterAppointments('all')">All</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="filterAppointments('scheduled')">Scheduled</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="filterAppointments('completed')">Completed</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="filterAppointments('cancelled')">Cancelled</a>
+                        </li>
+                    </ul>
+                    <div id="appointments-list">
+                        <p class="text-center text-muted">Loading appointments...</p>
+                    </div>
+                </section>
+
+                <!-- Prescriptions Section -->
+                <section id="prescriptions" class="section-content hidden">
+                    <h2 class="fw-bold mb-4"><i class="fas fa-prescription"></i> Prescriptions Issued</h2>
+                    <div id="prescriptions-list">
+                        <p class="text-center text-muted">Loading prescriptions...</p>
+                    </div>
+                </section>
+
+                <!-- Medical History Section -->
+                <section id="medical_history" class="section-content hidden">
+                    <h2 class="fw-bold mb-4"><i class="fas fa-file-medical"></i> Medical Records</h2>
+                    <div id="medical-history-list">
+                        <p class="text-center text-muted">Loading medical records...</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Patient Modal -->
+    <div class="modal fade" id="patientModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-user-edit"></i> Patient Information</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="patientForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Patient Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="patient-name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Patient ID</label>
+                                <input type="number" class="form-control" id="patient-id">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Age <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="patient-age" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Gender</label>
+                                <select class="form-control" id="patient-gender">
+                                    <option>Select Gender</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Phone <span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="patient-phone" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Blood Type</label>
+                                <select class="form-control" id="patient-blood-type">
+                                    <option>Select Blood Type</option>
+                                    <option>O+</option>
+                                    <option>O-</option>
+                                    <option>A+</option>
+                                    <option>A-</option>
+                                    <option>B+</option>
+                                    <option>B-</option>
+                                    <option>AB+</option>
+                                    <option>AB-</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Date of Admission</label>
+                            <input type="date" class="form-control" id="patient-admit-date">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Diagnosis/Disease <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="patient-disease" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Medical Conditions/History</label>
+                            <textarea class="form-control" id="patient-medical-history" rows="3"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Treatment Notes</label>
+                            <textarea class="form-control" id="patient-treatment-notes" rows="3"></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Stay Duration (days)</label>
+                                <input type="number" class="form-control" id="patient-stay-days">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Fees (₹)</label>
+                                <input type="number" class="form-control" id="patient-fees" step="0.01">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="savePatientDetails()">Save Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Patient Details View Modal -->
+    <div class="modal fade" id="patientDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-user"></i> Patient Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="patientDetails">
+                    <!-- Patient details will be populated here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="openEditPatientModal()">Edit</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const doctorId = {{ user_id }};
+        const doctorName = "{{ user_name }}";
+        let patientsList = [];
+        let appointmentsList = [];
+        let prescriptionsList = [];
+        let currentPatientId = null;
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+            loadPatients();
+            loadAppointments();
+            loadPrescriptions();
+            loadStatistics();
+        });
+
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            document.getElementById('current-time').textContent = now.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section-content').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.querySelectorAll('.sidebar-menu a').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.remove('hidden');
+            event.target.classList.add('active');
+        }
+
+        async function loadPatients() {
+            try {
+                const response = await fetch('/fetch_records');
+                if (response.ok) {
+                    patientsList = await response.json();
+                    displayPatients();
+                    document.getElementById('total-patients').textContent = patientsList.length;
+                }
+            } catch (error) {
+                console.error('Error loading patients:', error);
+                showError('Failed to load patients');
+            }
+        }
+
+        function displayPatients() {
+            const container = document.getElementById('patients-list');
+            
+            if (patientsList.length === 0) {
+                container.innerHTML = '<p class="text-center text-muted">No patients found</p>';
+                return;
+            }
+
+            container.innerHTML = patientsList.map(patient => `
+                <div class="patient-card">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h5 class="mb-2">${patient[1]} <span class="badge bg-info">#${patient[0]}</span></h5>
+                            <p class="mb-1"><strong>Age:</strong> ${patient[2]} years</p>
+                            <p class="mb-1"><strong>Condition:</strong> ${patient[3]}</p>
+                            <small class="text-muted">Admitted: ${patient[4]} | Stay: ${patient[5]} days</small>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <button class="btn btn-sm btn-info" onclick="viewPatientDetails(${patient[0]})">
+                                <i class="fas fa-eye"></i> View
+                            </button>
+                            <button class="btn btn-sm btn-warning" onclick="editPatient(${patient[0]})">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="deletePatient(${patient[0]})">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterPatients() {
+            const searchTerm = document.getElementById('patient-search').value.toLowerCase();
+            const filtered = patientsList.filter(p => 
+                p[1].toLowerCase().includes(searchTerm) || 
+                p[3].toLowerCase().includes(searchTerm)
+            );
+            
+            patientsList = filtered;
+            displayPatients();
+        }
+
+        async function loadAppointments() {
+            try {
+                const response = await fetch('/get_appointments');
+                if (response.ok) {
+                    const data = await response.json();
+                    appointmentsList = data.appointments || [];
+                    displayAppointments('all');
+                    document.getElementById('today-appointments').textContent = appointmentsList.filter(a => 
+                        a.date === new Date().toISOString().split('T')[0]
+                    ).length;
+                }
+            } catch (error) {
+                console.error('Error loading appointments:', error);
+            }
+        }
+
+        function displayAppointments(filter = 'all') {
+            let filtered = appointmentsList;
+            if (filter !== 'all') {
+                filtered = appointmentsList.filter(a => a.status === filter);
+            }
+
+            const container = document.getElementById('appointments-list');
+            if (filtered.length === 0) {
+                container.innerHTML = '<p class="text-center text-muted">No appointments found</p>';
+                return;
+            }
+
+            container.innerHTML = filtered.map(apt => `
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="card-title">${apt.participant}</h6>
+                                <p class="card-text"><strong>Date:</strong> ${apt.date} at ${apt.time}</p>
+                                <p class="card-text"><strong>Reason:</strong> ${apt.reason || 'Not specified'}</p>
+                            </div>
+                            <div class="col-md-6 text-end">
+                                <span class="badge-status bg-${apt.status === 'scheduled' ? 'success' : 'secondary'}">${apt.status}</span>
+                                <p class="mt-2">${apt.hospital}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterAppointments(status) {
+            displayAppointments(status);
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        async function loadPrescriptions() {
+            try {
+                const response = await fetch('/get_prescriptions');
+                if (response.ok) {
+                    const data = await response.json();
+                    prescriptionsList = data.prescriptions || [];
+                    displayPrescriptions();
+                    document.getElementById('total-prescriptions').textContent = prescriptionsList.length;
+                }
+            } catch (error) {
+                console.error('Error loading prescriptions:', error);
+            }
+        }
+
+        function displayPrescriptions() {
+            const container = document.getElementById('prescriptions-list');
+            if (prescriptionsList.length === 0) {
+                container.innerHTML = '<p class="text-center text-muted">No prescriptions found</p>';
+                return;
+            }
+
+            container.innerHTML = prescriptionsList.map(rx => `
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h6 class="card-title">${rx.medication} - ${rx.dosage}</h6>
+                        <p class="card-text"><strong>Frequency:</strong> ${rx.frequency}</p>
+                        <p class="card-text"><strong>Duration:</strong> ${rx.duration || 'Not specified'}</p>
+                        <small class="text-muted">Issued: ${rx.issued_date}</small>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadStatistics() {
+            document.getElementById('medical-records').textContent = patientsList.length;
+        }
+
+        function openAddPatientModal() {
+            document.getElementById('patientForm').reset();
+            document.getElementById('patient-id').value = '';
+            // Auto-fill today's date
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('patient-admit-date').value = today;
+            currentPatientId = null;
+            const modal = new bootstrap.Modal(document.getElementById('patientModal'));
+            modal.show();
+        }
+
+        function editPatient(patientId) {
+            const patient = patientsList.find(p => p[0] === patientId);
+            if (!patient) return;
+
+            document.getElementById('patient-id').value = patient[0];
+            document.getElementById('patient-name').value = patient[1];
+            document.getElementById('patient-age').value = patient[2];
+            document.getElementById('patient-disease').value = patient[3];
+            document.getElementById('patient-admit-date').value = patient[4];
+            document.getElementById('patient-stay-days').value = patient[5];
+            document.getElementById('patient-fees').value = patient[6];
+
+            currentPatientId = patientId;
+            const modal = new bootstrap.Modal(document.getElementById('patientModal'));
+            modal.show();
+        }
+
+        async function savePatientDetails() {
+            const patientData = {
+                sno: document.getElementById('patient-id').value || Date.now(),
+                name: document.getElementById('patient-name').value,
+                age: document.getElementById('patient-age').value,
+                disease: document.getElementById('patient-disease').value,
+                date: document.getElementById('patient-admit-date').value,
+                stay: document.getElementById('patient-stay-days').value,
+                fees: document.getElementById('patient-fees').value
+            };
+
+            if (!patientData.name || !patientData.age || !patientData.disease) {
+                showError('Please fill in all required fields');
+                return;
+            }
+
+            try {
+                const response = await fetch('/save_data', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(patientData)
+                });
+
+                if (response.ok) {
+                    showSuccess('Patient details saved successfully');
+                    bootstrap.Modal.getInstance(document.getElementById('patientModal')).hide();
+                    loadPatients();
+                } else {
+                    const error = await response.json();
+                    showError(error.error || 'Failed to save patient details');
+                }
+            } catch (error) {
+                showError('Error saving patient details: ' + error.message);
+            }
+        }
+
+        function viewPatientDetails(patientId) {
+            const patient = patientsList.find(p => p[0] === patientId);
+            if (!patient) return;
+
+            const details = `
+                <div class="patient-info">
+                    <p><strong>Name:</strong> ${patient[1]}</p>
+                    <p><strong>Age:</strong> ${patient[2]} years</p>
+                    <p><strong>Condition:</strong> ${patient[3]}</p>
+                    <p><strong>Admission Date:</strong> ${patient[4]}</p>
+                    <p><strong>Stay Duration:</strong> ${patient[5]} days</p>
+                    <p><strong>Fees:</strong> ₹${patient[6]}</p>
+                </div>
+            `;
+
+            document.getElementById('patientDetails').innerHTML = details;
+            const modal = new bootstrap.Modal(document.getElementById('patientDetailsModal'));
+            modal.show();
+        }
+
+        function openEditPatientModal() {
+            bootstrap.Modal.getInstance(document.getElementById('patientDetailsModal')).hide();
+            // Get the patient ID from the current view
+            const modal = new bootstrap.Modal(document.getElementById('patientModal'));
+            modal.show();
+        }
+
+        async function deletePatient(patientId) {
+            if (!confirm('Are you sure you want to delete this patient record?')) return;
+
+            try {
+                const response = await fetch(`/delete_record/${patientId}`, { method: 'DELETE' });
+                if (response.ok) {
+                    showSuccess('Patient record deleted successfully');
+                    loadPatients();
+                } else {
+                    showError('Failed to delete patient record');
+                }
+            } catch (error) {
+                showError('Error deleting patient: ' + error.message);
+            }
+        }
+
+        function showError(message) {
+            alert('❌ ' + message);
+        }
+
+        function showSuccess(message) {
+            alert('✅ ' + message);
+        }
+    </script>
+</body>
+</html>
